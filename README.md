@@ -14,6 +14,7 @@ Bilgi işlem profesyonelleri için günlük işlerde kullanılabilecek pratik ar
 
 ### 💻 System Tools (Sistem Araçları)
 - **system_info.py** - Detaylı sistem bilgilerini görüntüler (OS, CPU, RAM)
+- **system_info.bat** - Windows sistem bilgileri (basit versiyon)
 - **service_restart.bat** - Windows servislerini yeniden başlatma aracı
 - **disk_analyzer.py** - Disk kullanım analizi ve görselleştirme
 - **process_manager.py** - Çalışan işlemleri listeler ve sonlandırır
