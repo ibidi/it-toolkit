@@ -48,8 +48,8 @@ export default function SubmitToolPage() {
         usage: '',
         features: '',
       })
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Bir hata oluştu')
     } finally {
       setLoading(false)
     }

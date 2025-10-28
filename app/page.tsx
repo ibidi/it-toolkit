@@ -52,7 +52,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
             >
               <Github size={20} />
-              GitHub'da Görüntüle
+              GitHub&apos;da Görüntüle
             </a>
             <Link
               href="#tools"
