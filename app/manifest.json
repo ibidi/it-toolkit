@@ -1,0 +1,16 @@
+{
+  "name": "IT Toolkit - Bilgi İşlem Araçları",
+  "short_name": "IT Toolkit",
+  "description": "Ağ yönetimi, sistem kontrolü, güvenlik testleri ve otomasyon araçları",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

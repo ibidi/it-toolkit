@@ -59,6 +59,14 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-icon.svg', type: 'image/svg+xml' },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -70,6 +78,7 @@ export default function RootLayout({
     <html lang="tr">
       <head>
         <StructuredData />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={inter.className}>
         <Header />
