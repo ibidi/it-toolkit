@@ -3,7 +3,7 @@ import { Code2, Globe, Github, Instagram, X } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-200 mt-20">
+    <footer className="bg-white mt-20">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -84,7 +84,7 @@ export default function Footer() {
                 <Github size={18} />
                 GitHub
               </a>
-              <a href="https://instagram.com/ihsanbakidogannx" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors">
+              <a href="https://instagram.com/ihsanbakidogann" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors">
                 <Instagram size={18} />
                 Instagram
               </a>
