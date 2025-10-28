@@ -114,7 +114,7 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
                   href={`/tool/${relatedTool.id}`}
                   className="group bg-white rounded-xl p-6 border-2 border-black hover:bg-black hover:text-white transition-all"
                 >
-                  <h3 className="text-xl font-bold mb-2">
+                  <h3 className="text-xl font-bold text-black group-hover:text-white mb-2">
                     {relatedTool.name}
                   </h3>
                   <p className="text-gray-600 group-hover:text-gray-300 text-sm line-clamp-2">

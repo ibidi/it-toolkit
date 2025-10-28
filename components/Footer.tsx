@@ -90,7 +90,7 @@ export default function Footer() {
               </a>
               <a href="https://x.com/ibidicodes" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors">
                 <X size={18} />
-                X (Twitter)
+                X
               </a>
             </div>
           </div>
