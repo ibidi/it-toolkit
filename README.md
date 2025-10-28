@@ -115,7 +115,7 @@ npm start
 
 ### Vercel (Önerilen)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ibidi/it-toolkit-showcase)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ibidi/it-toolkit)
 
 ### Manuel Deployment
 
@@ -159,7 +159,7 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 - 🌐 Website: [ihsanbakidogan.com](https://ihsanbakidogan.com)
 - 💻 GitHub: [@ibidi](https://github.com/ibidi)
-- 📸 Instagram: [@ihsanbakidogann](https://instagram.com/ihsanbakidogann)
+- 📸 Instagram: [@ihsanbakidogannx](https://instagram.com/ihsanbakidogannx)
 - 🐦 X (Twitter): [@ibidicodes](https://x.com/ibidicodes)
 
 ## 🙏 Teşekkürler
