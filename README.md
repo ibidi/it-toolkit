@@ -1,112 +1,157 @@
-# 🛠️ IT Toolkit - Bilgi İşlem Araçları
+# 🛠️ IT Toolkit Showcase
 
-Bilgi işlem profesyonelleri için günlük işlerde kullanılabilecek pratik araçlar koleksiyonu. Ağ yönetimi, sistem kontrolü, güvenlik testleri ve otomasyon scriptleri içerir.
+Modern, minimal ve responsive bir web sitesi ile IT araçlarını sergileyin. Python ve Batch scriptlerinden oluşan IT Toolkit koleksiyonunu görsel olarak sunar.
 
-## 📦 İçerik
+![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-### 🌐 Network Tools (Ağ Araçları)
-- **ip_scanner.py** - Ağdaki aktif IP adreslerini tarayan araç
-- **ping_checker.bat** - Hızlı ping testi için basit batch scripti
-- **mac_scanner.py** - ARP tablosundan MAC adreslerini listeler
-- **dns_lookup.py** - Domain DNS sorguları ve IP çözümleme
-- **bandwidth_test.py** - İnternet hızı test aracı (speedtest-cli)
-- **latency_monitor.bat** - Ağ gecikmesi izleme aracı
+## 🎯 Özellikler
 
-### 💻 System Tools (Sistem Araçları)
-- **system_info.py** - Detaylı sistem bilgilerini görüntüler (OS, CPU, RAM)
-- **system_info.bat** - Windows sistem bilgileri (basit versiyon)
-- **service_restart.bat** - Windows servislerini yeniden başlatma aracı
-- **disk_analyzer.py** - Disk kullanım analizi ve görselleştirme
-- **process_manager.py** - Çalışan işlemleri listeler ve sonlandırır
-- **startup_manager.bat** - Başlangıç programları yöneticisi
-- **temp_cleaner.bat** - Geçici dosya temizleyici
+- ✅ **Modern Tasarım** - Minimal siyah-beyaz tema
+- ✅ **Responsive** - Mobil, tablet, desktop uyumlu
+- ✅ **Kod Gösterimi** - Syntax highlighting ve kopyalama özelliği
+- ✅ **Kategorize Edilmiş** - Network, System, Security, Automation
+- ✅ **SEO Optimized** - Static site generation
+- ✅ **Hızlı** - Next.js 15 ile optimize edilmiş
 
-### 🔒 Security Tools (Güvenlik Araçları)
-- **port_scanner.py** - TCP port tarama aracı (yaygın portları kontrol eder)
-- **password_audit.bat** - Basit parola güvenlik kontrolü
-- **ssl_checker.py** - SSL sertifika kontrolü ve geçerlilik süresi
-- **hash_generator.py** - Dosya/metin hash oluşturma ve doğrulama (MD5, SHA256, vb.)
-- **login_monitor.py** - Brute force koruması ve login izleme sistemi
-- **firewall_checker.bat** - Windows Firewall kural yöneticisi
+## 🚀 Hızlı Başlangıç
 
-### ⚙️ Automation Scripts (Otomasyon Scriptleri)
-- **backup_creator.py** - Klasör yedekleme aracı (ZIP formatında)
-- **log_cleaner.bat** - Log dosyalarını toplu temizleme
-- **report_generator.py** - Otomatik HTML sistem raporu oluşturucu
-- **bulk_renamer.py** - Toplu dosya yeniden adlandırma aracı
-- **task_scheduler.bat** - Windows görev zamanlayıcı yardımcısı
-- **email_notifier.py** - SMTP email bildirim gönderici
-
-## 🚀 Kullanım
-
-### Python Scriptleri
 ```bash
-# Gerekli kütüphaneleri yükleyin
-pip install psutil speedtest-cli
+# Bağımlılıkları yükle
+npm install
 
-# Herhangi bir Python scriptini çalıştırın
-python network-tools/ip_scanner.py
-python system-tools/system_info.py
-python security-tools/hash_generator.py
-python automation-scripts/report_generator.py
+# Geliştirme sunucusunu başlat
+npm run dev
+
+# Tarayıcıda aç
+http://localhost:3000
 ```
 
-### Batch Scriptleri (Windows)
-```cmd
-# Batch dosyalarını doğrudan çalıştırın (bazıları yönetici yetkisi gerektirir)
-automation-scripts\log_cleaner.bat
-network-tools\ping_checker.bat
-system-tools\temp_cleaner.bat
-security-tools\firewall_checker.bat
-```
+## 📦 Kurulum
 
-## 📋 Gereksinimler
-
-- **Python 3.x** (Python scriptleri için)
-- **psutil** kütüphanesi (sistem araçları için)
-- **speedtest-cli** kütüphanesi (bandwidth_test.py için)
-- **Windows** (Batch scriptleri için)
-- **Yönetici hakları** (bazı araçlar için gerekli)
-
-### Kurulum
 ```bash
-# Tüm Python bağımlılıklarını yükle
-pip install psutil speedtest-cli
+# Repository'yi klonla
+git clone https://github.com/ibidi/it-toolkit.git
+cd it-toolkit
+
+# Bağımlılıkları yükle
+npm install
+
+# Geliştirme modunda çalıştır
+npm run dev
+
+# Production build
+npm run build
+npm start
 ```
 
-## ⚠️ Uyarılar
+## 📁 Proje Yapısı
 
-- Port tarama ve ağ tarama araçlarını yalnızca kendi ağınızda veya izniniz olan sistemlerde kullanın
-- Bazı araçlar yönetici/root yetkisi gerektirebilir
-- Üretim ortamlarında kullanmadan önce test ortamında deneyin
+```
+.
+├── app/                        # Next.js App Router
+│   ├── page.tsx               # Ana sayfa
+│   ├── tool/[id]/             # Araç detay sayfaları
+│   └── category/[slug]/       # Kategori sayfaları
+├── components/                 # React bileşenleri
+│   └── CodeBlock.tsx          # Kod gösterimi
+├── lib/                       # Yardımcı fonksiyonlar
+│   └── tools-data.ts          # Araç verileri
+├── documents/                 # Dokümantasyon
+│   └── original-tools/        # Orijinal Python/Batch araçları
+└── public/                    # Statik dosyalar
+```
 
-## 🎯 Kullanım Senaryoları
+## 🎨 Sergilenen Araçlar
 
-### Network Yönetimi
-- Ağdaki aktif cihazları ve MAC adreslerini tespit etme
-- DNS sorguları ve domain çözümleme
-- İnternet hızı ve ağ gecikmesi ölçümü
-- Port tarama ve güvenlik kontrolü
+### 🌐 Network Tools
+- **IP Scanner** - Ağdaki aktif IP'leri tarar
+- **DNS Lookup** - Domain DNS sorguları
+- **Bandwidth Test** - İnternet hızı testi
 
-### Sistem Yönetimi
-- Sistem kaynaklarını izleme (CPU, RAM, Disk)
-- Çalışan işlemleri yönetme ve sonlandırma
-- Başlangıç programlarını kontrol etme
-- Geçici dosyaları ve disk alanını temizleme
+### 💻 System Tools
+- **Disk Analyzer** - Disk kullanım analizi
+- **Process Manager** - İşlem yönetimi
 
-### Güvenlik
-- SSL sertifikalarını kontrol etme
-- Dosya bütünlüğü doğrulama (hash)
-- Brute force saldırılarına karşı koruma
-- Firewall kurallarını yönetme
-- Parola güvenliği denetimi
+### � Security oTools
+- **Hash Generator** - MD5, SHA256 vb. hash oluşturma
+- **Port Scanner** - TCP port tarama
+- **Login Monitor** - Brute force koruması
 
-### Otomasyon
-- Otomatik sistem raporları oluşturma
-- Düzenli yedekleme işlemleri
-- Toplu dosya işlemleri
-- Zamanlanmış görevler oluşturma
-- Email bildirimleri gönderme
+### ⚙️ Automation
+- **Backup Creator** - Klasör yedekleme
+- **Report Generator** - HTML rapor oluşturma
+
+## 🔧 Teknolojiler
+
+- **Framework**: [Next.js 15](https://nextjs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Deployment**: [Vercel](https://vercel.com/)
+
+## 📝 Yeni Araç Ekleme
+
+`lib/tools-data.ts` dosyasını düzenleyin:
+
+```typescript
+{
+  id: 'yeni-arac',
+  name: 'Yeni Araç',
+  category: 'network', // network, system, security, automation
+  description: 'Kısa açıklama',
+  fileName: 'script.py',
+  language: 'python', // python veya batch
+  features: ['Özellik 1', 'Özellik 2'],
+  usage: 'python script.py',
+  code: `// Kaynak kod`,
+  example: `// Örnek çıktı`
+}
+```
+
+## 🚀 Deployment
+
+### Vercel (Önerilen)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ibidi/it-toolkit-showcase)
+
+### Manuel Deployment
+
+```bash
+# Build
+npm run build
+
+# Start
+npm start
+```
+
+## 📸 Ekran Görüntüleri
+
+### Ana Sayfa
+Modern, minimal tasarım ile tüm araçları sergiler.
+
+### Araç Detay Sayfası
+- Detaylı açıklama
+- Özellikler listesi
+- Tam kaynak kod (kopyalama özelliği ile)
+- Örnek çıktı
+- Benzer araçlar
+
+## 🤝 Katkıda Bulunma
+
+Katkılarınızı bekliyoruz! Pull request göndermekten çekinmeyin.
+
+1. Fork edin
+2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
+3. Commit edin (`git commit -m 'feat: Add amazing feature'`)
+4. Push edin (`git push origin feature/amazing-feature`)
+5. Pull Request açın
+
+## 📄 Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
 
 ## 👨‍💻 Geliştirici
 
@@ -114,17 +159,15 @@ pip install psutil speedtest-cli
 
 - 🌐 Website: [ihsanbakidogan.com](https://ihsanbakidogan.com)
 - 💻 GitHub: [@ibidi](https://github.com/ibidi)
-- 📸 Instagram: [@ihsanbakidogannx](https://instagram.com/ihsanbakidogannx)
+- 📸 Instagram: [@ihsanbakidogann](https://instagram.com/ihsanbakidogann)
 - 🐦 X (Twitter): [@ibidicodes](https://x.com/ibidicodes)
 
-## 📝 Lisans
+## 🙏 Teşekkürler
 
-Bu proje eğitim ve öğrenme amaçlıdır. Kendi sorumluluğunuzda kullanın.
-
-## 🤝 Katkıda Bulunma
-
-Katkılarınızı bekliyorum! Pull request göndermekten çekinmeyin.
+Bu proje açık kaynak topluluğu için geliştirilmiştir.
 
 ---
 
 ⭐ Projeyi beğendiyseniz yıldız vermeyi unutmayın!
+
+**Made with ❤️ by İhsan Baki Doğan**
