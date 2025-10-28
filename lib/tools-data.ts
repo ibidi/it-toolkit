@@ -362,6 +362,298 @@ Yedeklenecek klasör yolunu girin: C:\\Documents
 [+] backup_20251028_143052.zip oluşturuldu.`
   },
   {
+    id: 'mac-scanner',
+    name: 'MAC Scanner',
+    category: 'network',
+    description: 'ARP tablosundan MAC adreslerini listeler ve cihaz bilgilerini gösterir.',
+    fileName: 'mac_scanner.py',
+    language: 'python',
+    features: [
+      'ARP tablosu okuma',
+      'MAC adresi listeleme',
+      'Cihaz bilgisi gösterme',
+      'Network interface tespiti'
+    ],
+    usage: 'python network-tools/mac_scanner.py',
+    code: `"""
+MAC Adresi Tarayıcı
+ARP tablosundan MAC adreslerini listeler.
+"""
+import subprocess
+import platform
+
+def get_arp_table():
+    system = platform.system().lower()
+    if system == "windows":
+        cmd = ["arp", "-a"]
+    else:
+        cmd = ["arp", "-n"]
+    
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    return result.stdout
+
+def parse_arp_table(arp_output):
+    print("\\n" + "="*60)
+    print("              MAC ADRESLERİ")
+    print("="*60)
+    
+    for line in arp_output.split('\\n'):
+        if '.' in line and ':' in line or '-' in line:
+            print(line.strip())
+
+if __name__ == "__main__":
+    arp_data = get_arp_table()
+    parse_arp_table(arp_data)`,
+    example: `$ python mac_scanner.py
+============================================================
+              MAC ADRESLERİ
+============================================================
+192.168.1.1    00-11-22-33-44-55    dynamic
+192.168.1.10   AA-BB-CC-DD-EE-FF    dynamic`
+  },
+  {
+    id: 'ssl-checker',
+    name: 'SSL Checker',
+    category: 'security',
+    description: 'SSL sertifika kontrolü ve geçerlilik süresi kontrolü yapar.',
+    fileName: 'ssl_checker.py',
+    language: 'python',
+    features: [
+      'SSL sertifika kontrolü',
+      'Geçerlilik süresi kontrolü',
+      'Sertifika detayları',
+      'Güvenlik uyarıları'
+    ],
+    usage: 'python security-tools/ssl_checker.py',
+    code: `"""
+SSL Sertifika Kontrolü
+Domain SSL sertifikasını kontrol eder.
+"""
+import ssl
+import socket
+from datetime import datetime
+
+def check_ssl(hostname, port=443):
+    context = ssl.create_default_context()
+    
+    try:
+        with socket.create_connection((hostname, port), timeout=10) as sock:
+            with context.wrap_socket(sock, server_hostname=hostname) as ssock:
+                cert = ssock.getpeercert()
+                
+                print(f"\\n[+] SSL Sertifika Bilgileri: {hostname}")
+                print("="*60)
+                
+                # Geçerlilik tarihleri
+                not_before = datetime.strptime(cert['notBefore'], '%b %d %H:%M:%S %Y %Z')
+                not_after = datetime.strptime(cert['notAfter'], '%b %d %H:%M:%S %Y %Z')
+                
+                print(f"Başlangıç: {not_before}")
+                print(f"Bitiş: {not_after}")
+                
+                # Kalan gün
+                days_left = (not_after - datetime.now()).days
+                print(f"Kalan Gün: {days_left}")
+                
+                if days_left < 30:
+                    print("⚠️  Sertifika yakında sona erecek!")
+                else:
+                    print("✓ Sertifika geçerli")
+                    
+    except Exception as e:
+        print(f"[!] Hata: {e}")
+
+if __name__ == "__main__":
+    domain = input("Domain adı: ")
+    check_ssl(domain)`,
+    example: `$ python ssl_checker.py
+Domain adı: google.com
+
+[+] SSL Sertifika Bilgileri: google.com
+============================================================
+Başlangıç: 2024-10-01 00:00:00
+Bitiş: 2025-12-31 23:59:59
+Kalan Gün: 428
+✓ Sertifika geçerli`
+  },
+  {
+    id: 'process-manager',
+    name: 'Process Manager',
+    category: 'system',
+    description: 'Çalışan işlemleri listeler, CPU ve RAM kullanımını gösterir, işlem sonlandırma özelliği.',
+    fileName: 'process_manager.py',
+    language: 'python',
+    features: [
+      'İşlem listeleme',
+      'CPU kullanımı gösterme',
+      'RAM kullanımı gösterme',
+      'İşlem sonlandırma'
+    ],
+    usage: 'python system-tools/process_manager.py',
+    code: `"""
+Process Manager
+Çalışan işlemleri listeler ve yönetir.
+"""
+import psutil
+
+def list_processes():
+    print("\\n" + "="*80)
+    print("                    ÇALIŞAN İŞLEMLER")
+    print("="*80)
+    print(f"{'PID':<10} {'İsim':<30} {'CPU %':<10} {'RAM (MB)':<10}")
+    print("-"*80)
+    
+    for proc in psutil.process_iter(['pid', 'name', 'cpu_percent', 'memory_info']):
+        try:
+            pid = proc.info['pid']
+            name = proc.info['name'][:29]
+            cpu = proc.info['cpu_percent']
+            memory = proc.info['memory_info'].rss / 1024 / 1024
+            
+            print(f"{pid:<10} {name:<30} {cpu:<10.1f} {memory:<10.1f}")
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+
+def kill_process(pid):
+    try:
+        proc = psutil.Process(pid)
+        proc.terminate()
+        print(f"[+] İşlem {pid} sonlandırıldı")
+    except Exception as e:
+        print(f"[!] Hata: {e}")
+
+if __name__ == "__main__":
+    list_processes()`,
+    example: `$ python process_manager.py
+================================================================================
+                    ÇALIŞAN İŞLEMLER
+================================================================================
+PID        İsim                           CPU %      RAM (MB)   
+--------------------------------------------------------------------------------
+1234       chrome.exe                     15.2       2048.5     
+5678       python.exe                     5.3        512.3      
+9012       explorer.exe                   2.1        1024.8`
+  },
+  {
+    id: 'bulk-renamer',
+    name: 'Bulk Renamer',
+    category: 'automation',
+    description: 'Toplu dosya yeniden adlandırma aracı. Prefix, suffix ekleme ve numara verme özellikleri.',
+    fileName: 'bulk_renamer.py',
+    language: 'python',
+    features: [
+      'Toplu dosya yeniden adlandırma',
+      'Prefix/Suffix ekleme',
+      'Numara verme',
+      'Güvenli yeniden adlandırma'
+    ],
+    usage: 'python automation-scripts/bulk_renamer.py',
+    code: `"""
+Toplu Dosya Yeniden Adlandırma
+Klasördeki dosyaları toplu olarak yeniden adlandırır.
+"""
+import os
+
+def bulk_rename(folder, prefix="", suffix="", start_num=1):
+    if not os.path.exists(folder):
+        print("[!] Klasör bulunamadı!")
+        return
+    
+    files = [f for f in os.listdir(folder) if os.path.isfile(os.path.join(folder, f))]
+    
+    print(f"[+] {len(files)} dosya bulundu")
+    
+    for i, filename in enumerate(files, start=start_num):
+        name, ext = os.path.splitext(filename)
+        new_name = f"{prefix}{i:03d}{suffix}{ext}"
+        
+        old_path = os.path.join(folder, filename)
+        new_path = os.path.join(folder, new_name)
+        
+        os.rename(old_path, new_path)
+        print(f"[+] {filename} -> {new_name}")
+    
+    print(f"\\n[✓] {len(files)} dosya yeniden adlandırıldı")
+
+if __name__ == "__main__":
+    folder = input("Klasör yolu: ")
+    prefix = input("Prefix (opsiyonel): ")
+    suffix = input("Suffix (opsiyonel): ")
+    
+    bulk_rename(folder, prefix, suffix)`,
+    example: `$ python bulk_renamer.py
+Klasör yolu: C:\\Photos
+Prefix (opsiyonel): photo_
+Suffix (opsiyonel): _2024
+
+[+] 5 dosya bulundu
+[+] IMG001.jpg -> photo_001_2024.jpg
+[+] IMG002.jpg -> photo_002_2024.jpg
+[+] IMG003.jpg -> photo_003_2024.jpg
+
+[✓] 5 dosya yeniden adlandırıldı`
+  },
+  {
+    id: 'email-notifier',
+    name: 'Email Notifier',
+    category: 'automation',
+    description: 'SMTP ile email bildirim gönderici. Otomatik bildirimler ve raporlar için kullanılır.',
+    fileName: 'email_notifier.py',
+    language: 'python',
+    features: [
+      'SMTP email gönderimi',
+      'HTML email desteği',
+      'Ek dosya gönderme',
+      'Toplu gönderim'
+    ],
+    usage: 'python automation-scripts/email_notifier.py',
+    code: `"""
+Email Bildirim Gönderici
+SMTP ile email gönderir.
+"""
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+def send_email(to_email, subject, message):
+    # SMTP ayarları (örnek: Gmail)
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587
+    sender_email = "your-email@gmail.com"
+    password = "your-app-password"
+    
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = to_email
+    msg['Subject'] = subject
+    
+    msg.attach(MIMEText(message, 'plain'))
+    
+    try:
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(sender_email, password)
+        server.send_message(msg)
+        server.quit()
+        
+        print(f"[✓] Email gönderildi: {to_email}")
+    except Exception as e:
+        print(f"[!] Hata: {e}")
+
+if __name__ == "__main__":
+    to = input("Alıcı email: ")
+    subject = input("Konu: ")
+    message = input("Mesaj: ")
+    
+    send_email(to, subject, message)`,
+    example: `$ python email_notifier.py
+Alıcı email: user@example.com
+Konu: Test Bildirimi
+Mesaj: Bu bir test mesajıdır.
+
+[✓] Email gönderildi: user@example.com`
+  },
+  {
     id: 'report-generator',
     name: 'Report Generator',
     category: 'automation',

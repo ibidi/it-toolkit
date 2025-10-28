@@ -52,11 +52,11 @@ export default function Home() {
         {/* Featured Tools */}
         <div id="tools">
           <h2 className="text-4xl font-bold text-black text-center mb-12">
-            Öne Çıkan Araçlar
+            Tüm Araçlar
           </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {tools.slice(0, 6).map((tool) => (
+            {tools.map((tool) => (
               <Link
                 key={tool.id}
                 href={`/tool/${tool.id}`}

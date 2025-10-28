@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Code2, Globe, Github, Instagram, Twitter } from 'lucide-react'
+import { Code2, Globe, Github, Instagram, X } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -89,7 +89,7 @@ export default function Footer() {
                 Instagram
               </a>
               <a href="https://x.com/ibidicodes" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors">
-                <Twitter size={18} />
+                <X size={18} />
                 X (Twitter)
               </a>
             </div>
