@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 
 function parseToolFromMessage(text: string) {
   const lines = text.split('\n')
-  const data: Record<string, string> = {}
+  const data: Record<string, string | string[] | boolean> = {}
 
   lines.forEach(line => {
     if (line.includes('*İsim:*')) data.name = line.split('*İsim:*')[1].trim()
@@ -51,7 +51,7 @@ function parseToolFromMessage(text: string) {
   })
 
   // Generate ID
-  data.id = data.name?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || 'tool-' + Date.now()
+  data.id = (data.name as string)?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || 'tool-' + Date.now()
   data.fileName = `${data.id}.${data.language === 'python' ? 'py' : 'bat'}`
   data.features = ['Önizleme aracı', 'Topluluk katkısı']
   data.code = '# Kod yakında eklenecek'
@@ -61,7 +61,7 @@ function parseToolFromMessage(text: string) {
   return data
 }
 
-async function addPendingTool(toolData: Record<string, string | boolean>) {
+async function addPendingTool(toolData: Record<string, string | string[] | boolean>) {
   const filePath = path.join(process.cwd(), 'lib', 'pending-tools.json')
   let pendingTools = []
 
