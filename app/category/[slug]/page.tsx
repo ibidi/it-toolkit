@@ -55,7 +55,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">
+                  <h3 className="text-2xl font-bold text-black group-hover:text-white mb-2">
                     {tool.name}
                   </h3>
                   <span className="text-xs px-3 py-1 bg-gray-200 group-hover:bg-gray-700 text-black group-hover:text-white rounded-full">
@@ -71,13 +71,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               <div className="space-y-2 mb-4">
                 {tool.features.slice(0, 3).map((feature, i) => (
                   <div key={i} className="flex items-start gap-2">
-                    <span className="text-xs mt-1">✓</span>
+                    <span className="text-black group-hover:text-white text-xs mt-1">✓</span>
                     <span className="text-sm text-gray-600 group-hover:text-gray-300">{feature}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="flex items-center text-sm font-medium">
+              <div className="flex items-center text-sm font-medium text-black group-hover:text-white">
                 Detayları Gör
                 <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" size={16} />
               </div>

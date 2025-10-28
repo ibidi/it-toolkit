@@ -1,8 +1,8 @@
 import { tools, categories } from '@/lib/tools-data'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Copy, Check, Terminal, FileCode } from 'lucide-react'
-import CodeBlock from '@/components/CodeBlock'
+import { ArrowLeft, Terminal, FileCode, Check } from 'lucide-react'
+import CodeModalButton from '@/components/CodeModalButton'
 
 export function generateStaticParams() {
   return tools.map((tool) => ({
@@ -87,7 +87,7 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
               <h2 className="text-2xl font-bold text-black">Kaynak Kod</h2>
             </div>
           </div>
-          <CodeBlock code={tool.code} language="python" />
+          <CodeModalButton code={tool.code} title={`${tool.name} - Kaynak Kod`} />
         </div>
 
         {/* Example Output */}

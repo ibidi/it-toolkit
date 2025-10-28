@@ -159,7 +159,7 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 - 🌐 Website: [ihsanbakidogan.com](https://ihsanbakidogan.com)
 - 💻 GitHub: [@ibidi](https://github.com/ibidi)
-- 📸 Instagram: [@ihsanbakidogannx](https://instagram.com/ihsanbakidogannx)
+- 📸 Instagram: [@ihsanbakidogann](https://instagram.com/ihsanbakidogann)
 - 🐦 X (Twitter): [@ibidicodes](https://x.com/ibidicodes)
 
 ## 🙏 Teşekkürler
