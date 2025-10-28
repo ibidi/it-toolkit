@@ -31,16 +31,24 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* GitHub Button */}
-          <a
-            href="https://github.com/ibidi/it-toolkit"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
-          >
-            <Github size={18} />
-            <span className="hidden sm:inline">GitHub</span>
-          </a>
+          {/* Actions */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/submit-tool"
+              className="bg-white text-black border-2 border-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-sm"
+            >
+              Araç Öner
+            </Link>
+            <a
+              href="https://github.com/ibidi/it-toolkit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+            >
+              <Github size={18} />
+              <span className="hidden sm:inline">GitHub</span>
+            </a>
+          </div>
         </div>
       </div>
     </header>

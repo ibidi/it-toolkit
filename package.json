@@ -1,6 +1,6 @@
 {
   "name": "it-toolkit-showcase",
-  "version": "1.0.0",
+  "version": "2.2.0",
   "description": "Modern web showcase for IT tools - Network, System, Security & Automation scripts",
   "author": "İhsan Baki Doğan <https://ihsanbakidogan.com>",
   "license": "MIT",
@@ -27,11 +27,14 @@
   },
   "dependencies": {
     "@types/prismjs": "^1.26.5",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.24",
     "lucide-react": "^0.548.0",
     "next": "16.0.0",
     "prismjs": "^1.30.0",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

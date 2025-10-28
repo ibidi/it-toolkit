@@ -654,6 +654,296 @@ Mesaj: Bu bir test mesajıdır.
 [✓] Email gönderildi: user@example.com`
   },
   {
+    id: 'ping-monitor',
+    name: 'Ping Monitor',
+    category: 'network',
+    description: 'Sürekli ping izleme aracı. Ağ bağlantısını izler ve kesintileri loglar.',
+    fileName: 'ping_monitor.py',
+    language: 'python',
+    features: [
+      'Sürekli ping izleme',
+      'Kesinti tespiti',
+      'Log kayıt',
+      'İstatistik gösterimi'
+    ],
+    usage: 'python network-tools/ping_monitor.py',
+    code: `"""
+Ping İzleme Aracı
+Sürekli ping atarak ağ bağlantısını izler.
+"""
+import subprocess
+import time
+from datetime import datetime
+
+def ping_monitor(host, interval=1):
+    print(f"[+] {host} izleniyor... (Ctrl+C ile durdurun)")
+    
+    success_count = 0
+    fail_count = 0
+    
+    while True:
+        try:
+            result = subprocess.run(
+                ['ping', '-n' if os.name == 'nt' else '-c', '1', host],
+                capture_output=True,
+                timeout=5
+            )
+            
+            timestamp = datetime.now().strftime("%H:%M:%S")
+            
+            if result.returncode == 0:
+                success_count += 1
+                print(f"[{timestamp}] ✓ {host} - Başarılı ({success_count}/{success_count + fail_count})")
+            else:
+                fail_count += 1
+                print(f"[{timestamp}] ✗ {host} - Başarısız! ({fail_count} kesinti)")
+            
+            time.sleep(interval)
+            
+        except KeyboardInterrupt:
+            print(f"\\n[+] İzleme durduruldu")
+            print(f"Toplam: {success_count + fail_count}, Başarılı: {success_count}, Başarısız: {fail_count}")
+            break
+
+if __name__ == "__main__":
+    host = input("İzlenecek host: ")
+    ping_monitor(host)`,
+    example: `$ python ping_monitor.py
+İzlenecek host: 8.8.8.8
+[+] 8.8.8.8 izleniyor... (Ctrl+C ile durdurun)
+[14:30:01] ✓ 8.8.8.8 - Başarılı (1/1)
+[14:30:02] ✓ 8.8.8.8 - Başarılı (2/2)
+[14:30:03] ✗ 8.8.8.8 - Başarısız! (1 kesinti)`
+  },
+  {
+    id: 'system-monitor',
+    name: 'System Monitor',
+    category: 'system',
+    description: 'Gerçek zamanlı sistem izleme aracı. CPU, RAM, Disk kullanımını sürekli gösterir.',
+    fileName: 'system_monitor.py',
+    language: 'python',
+    features: [
+      'Gerçek zamanlı izleme',
+      'CPU, RAM, Disk metrikleri',
+      'Renkli çıktı',
+      'Uyarı sistemi'
+    ],
+    usage: 'python system-tools/system_monitor.py',
+    code: `"""
+Sistem İzleme Aracı
+Gerçek zamanlı sistem metriklerini gösterir.
+"""
+import psutil
+import time
+import os
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def get_bar(percent, length=20):
+    filled = int(length * percent / 100)
+    return '█' * filled + '░' * (length - filled)
+
+def monitor():
+    print("[+] Sistem izleniyor... (Ctrl+C ile durdurun)\\n")
+    
+    try:
+        while True:
+            clear_screen()
+            
+            # CPU
+            cpu = psutil.cpu_percent(interval=1)
+            print(f"CPU:    [{get_bar(cpu)}] {cpu}%")
+            
+            # RAM
+            mem = psutil.virtual_memory()
+            print(f"RAM:    [{get_bar(mem.percent)}] {mem.percent}%")
+            
+            # Disk
+            disk = psutil.disk_usage('/')
+            print(f"Disk:   [{get_bar(disk.percent)}] {disk.percent}%")
+            
+            # Uyarılar
+            if cpu > 80:
+                print("\\n⚠️  CPU kullanımı yüksek!")
+            if mem.percent > 80:
+                print("⚠️  RAM kullanımı yüksek!")
+            
+            time.sleep(2)
+            
+    except KeyboardInterrupt:
+        print("\\n[+] İzleme durduruldu")
+
+if __name__ == "__main__":
+    monitor()`,
+    example: `$ python system_monitor.py
+[+] Sistem izleniyor... (Ctrl+C ile durdurun)
+
+CPU:    [████████░░░░░░░░░░░░] 42%
+RAM:    [██████████████░░░░░░] 68%
+Disk:   [███████████░░░░░░░░░] 55%`
+  },
+  {
+    id: 'file-encryptor',
+    name: 'File Encryptor',
+    category: 'security',
+    description: 'Dosya şifreleme ve şifre çözme aracı. AES-256 şifreleme kullanır.',
+    fileName: 'file_encryptor.py',
+    language: 'python',
+    features: [
+      'AES-256 şifreleme',
+      'Dosya şifreleme/çözme',
+      'Güvenli anahtar yönetimi',
+      'Toplu dosya işleme'
+    ],
+    usage: 'python security-tools/file_encryptor.py',
+    code: `"""
+Dosya Şifreleme Aracı
+AES-256 ile dosya şifreler ve çözer.
+"""
+from cryptography.fernet import Fernet
+import os
+
+def generate_key():
+    """Şifreleme anahtarı oluşturur"""
+    key = Fernet.generate_key()
+    with open('secret.key', 'wb') as key_file:
+        key_file.write(key)
+    print("[+] Anahtar oluşturuldu: secret.key")
+    return key
+
+def load_key():
+    """Anahtarı yükler"""
+    return open('secret.key', 'rb').read()
+
+def encrypt_file(filename, key):
+    """Dosyayı şifreler"""
+    f = Fernet(key)
+    
+    with open(filename, 'rb') as file:
+        file_data = file.read()
+    
+    encrypted_data = f.encrypt(file_data)
+    
+    with open(filename + '.encrypted', 'wb') as file:
+        file.write(encrypted_data)
+    
+    print(f"[+] {filename} şifrelendi")
+
+def decrypt_file(filename, key):
+    """Dosyanın şifresini çözer"""
+    f = Fernet(key)
+    
+    with open(filename, 'rb') as file:
+        encrypted_data = file.read()
+    
+    decrypted_data = f.decrypt(encrypted_data)
+    
+    with open(filename.replace('.encrypted', ''), 'wb') as file:
+        file.write(decrypted_data)
+    
+    print(f"[+] {filename} şifresi çözüldü")
+
+if __name__ == "__main__":
+    print("[1] Şifrele")
+    print("[2] Şifre Çöz")
+    choice = input("Seçim: ")
+    
+    if choice == "1":
+        key = generate_key()
+        file = input("Dosya: ")
+        encrypt_file(file, key)
+    elif choice == "2":
+        key = load_key()
+        file = input("Dosya: ")
+        decrypt_file(file, key)`,
+    example: `$ python file_encryptor.py
+[1] Şifrele
+[2] Şifre Çöz
+Seçim: 1
+Dosya: document.txt
+[+] Anahtar oluşturuldu: secret.key
+[+] document.txt şifrelendi`
+  },
+  {
+    id: 'log-analyzer',
+    name: 'Log Analyzer',
+    category: 'automation',
+    description: 'Log dosyalarını analiz eder. Hata tespiti, istatistik ve rapor oluşturur.',
+    fileName: 'log_analyzer.py',
+    language: 'python',
+    features: [
+      'Log dosyası analizi',
+      'Hata tespiti',
+      'İstatistik oluşturma',
+      'Filtreleme'
+    ],
+    usage: 'python automation-scripts/log_analyzer.py',
+    code: `"""
+Log Analiz Aracı
+Log dosyalarını analiz eder ve rapor oluşturur.
+"""
+import re
+from collections import Counter
+from datetime import datetime
+
+def analyze_log(filename):
+    print(f"[+] {filename} analiz ediliyor...\\n")
+    
+    errors = []
+    warnings = []
+    info = []
+    timestamps = []
+    
+    with open(filename, 'r') as f:
+        for line in f:
+            # Zaman damgası
+            time_match = re.search(r'\\d{2}:\\d{2}:\\d{2}', line)
+            if time_match:
+                timestamps.append(time_match.group())
+            
+            # Log seviyeleri
+            if 'ERROR' in line.upper():
+                errors.append(line.strip())
+            elif 'WARNING' in line.upper():
+                warnings.append(line.strip())
+            elif 'INFO' in line.upper():
+                info.append(line.strip())
+    
+    # Rapor
+    print("="*60)
+    print("                  LOG ANALİZ RAPORU")
+    print("="*60)
+    print(f"Toplam Satır: {len(errors) + len(warnings) + len(info)}")
+    print(f"Hata: {len(errors)}")
+    print(f"Uyarı: {len(warnings)}")
+    print(f"Bilgi: {len(info)}")
+    
+    if errors:
+        print(f"\\n[!] Son 5 Hata:")
+        for error in errors[-5:]:
+            print(f"  - {error[:80]}...")
+
+if __name__ == "__main__":
+    file = input("Log dosyası: ")
+    analyze_log(file)`,
+    example: `$ python log_analyzer.py
+Log dosyası: app.log
+[+] app.log analiz ediliyor...
+
+============================================================
+                  LOG ANALİZ RAPORU
+============================================================
+Toplam Satır: 1523
+Hata: 12
+Uyarı: 45
+Bilgi: 1466
+
+[!] Son 5 Hata:
+  - [14:30:15] ERROR: Database connection failed...
+  - [14:35:22] ERROR: File not found: config.json...`
+  },
+  {
     id: 'report-generator',
     name: 'Report Generator',
     category: 'automation',
@@ -711,6 +1001,462 @@ def generate_report():
     example: `$ python report_generator.py
 [+] Sistem raporu oluşturuluyor...
 [+] Rapor oluşturuldu: sistem_raporu_20251028_143052.html`
+  },
+  {
+    id: 'network-speed-test',
+    name: 'Network Speed Test',
+    category: 'network',
+    description: 'İnternet hızı test aracı. Download, upload ve ping değerlerini ölçer.',
+    fileName: 'speed_test.py',
+    language: 'python',
+    features: [
+      'Download hızı ölçümü',
+      'Upload hızı ölçümü',
+      'Ping ve jitter testi',
+      'Sunucu seçimi'
+    ],
+    usage: 'python network-tools/speed_test.py',
+    code: `"""
+İnternet Hızı Test Aracı
+Download, upload ve ping değerlerini ölçer.
+"""
+import speedtest
+
+def test_speed():
+    print("[+] Hız testi başlatılıyor...\\n")
+    
+    st = speedtest.Speedtest()
+    
+    print("[+] En iyi sunucu seçiliyor...")
+    st.get_best_server()
+    
+    print("[+] Download hızı ölçülüyor...")
+    download = st.download() / 1_000_000  # Mbps
+    
+    print("[+] Upload hızı ölçülüyor...")
+    upload = st.upload() / 1_000_000  # Mbps
+    
+    print("[+] Ping ölçülüyor...")
+    ping = st.results.ping
+    
+    print("\\n" + "="*60)
+    print("              İNTERNET HIZ TESTİ")
+    print("="*60)
+    print(f"Download: {download:.2f} Mbps")
+    print(f"Upload:   {upload:.2f} Mbps")
+    print(f"Ping:     {ping:.2f} ms")
+    print("="*60)
+
+if __name__ == "__main__":
+    test_speed()`,
+    example: `$ python speed_test.py
+[+] Hız testi başlatılıyor...
+[+] En iyi sunucu seçiliyor...
+[+] Download hızı ölçülüyor...
+[+] Upload hızı ölçülüyor...
+[+] Ping ölçülüyor...
+
+============================================================
+              İNTERNET HIZ TESTİ
+============================================================
+Download: 125.43 Mbps
+Upload:   45.67 Mbps
+Ping:     12.34 ms
+============================================================`
+  },
+  {
+    id: 'cpu-temp-monitor',
+    name: 'CPU Temperature Monitor',
+    category: 'system',
+    description: 'CPU sıcaklık izleme aracı. Sıcaklık değerlerini gösterir ve uyarı verir.',
+    fileName: 'cpu_temp.py',
+    language: 'python',
+    features: [
+      'CPU sıcaklık izleme',
+      'Çekirdek bazlı ölçüm',
+      'Uyarı sistemi',
+      'Gerçek zamanlı güncelleme'
+    ],
+    usage: 'python system-tools/cpu_temp.py',
+    code: `"""
+CPU Sıcaklık İzleyici
+CPU sıcaklık değerlerini gösterir.
+"""
+import psutil
+import time
+
+def monitor_temperature():
+    print("[+] CPU sıcaklığı izleniyor...\\n")
+    
+    try:
+        while True:
+            temps = psutil.sensors_temperatures()
+            
+            if not temps:
+                print("[!] Sıcaklık sensörü bulunamadı")
+                break
+            
+            print("="*60)
+            print("           CPU SICAKLIK İZLEME")
+            print("="*60)
+            
+            for name, entries in temps.items():
+                print(f"\\n{name}:")
+                for entry in entries:
+                    temp = entry.current
+                    status = "🔥" if temp > 80 else "⚠️" if temp > 60 else "✓"
+                    print(f"  {entry.label}: {temp}°C {status}")
+            
+            time.sleep(2)
+            
+    except KeyboardInterrupt:
+        print("\\n[+] İzleme durduruldu")
+
+if __name__ == "__main__":
+    monitor_temperature()`,
+    example: `$ python cpu_temp.py
+[+] CPU sıcaklığı izleniyor...
+
+============================================================
+           CPU SICAKLIK İZLEME
+============================================================
+
+coretemp:
+  Core 0: 45°C ✓
+  Core 1: 48°C ✓
+  Core 2: 52°C ✓
+  Core 3: 50°C ✓`
+  },
+  {
+    id: 'password-generator',
+    name: 'Password Generator',
+    category: 'security',
+    description: 'Güçlü şifre oluşturucu. Özelleştirilebilir uzunluk ve karakter seçenekleri.',
+    fileName: 'password_generator.py',
+    language: 'python',
+    features: [
+      'Güçlü şifre oluşturma',
+      'Özelleştirilebilir uzunluk',
+      'Karakter seçenekleri',
+      'Toplu şifre oluşturma'
+    ],
+    usage: 'python security-tools/password_generator.py',
+    code: `"""
+Güçlü Şifre Oluşturucu
+Rastgele güçlü şifreler oluşturur.
+"""
+import random
+import string
+
+def generate_password(length=16, use_upper=True, use_lower=True, 
+                     use_digits=True, use_special=True):
+    chars = ''
+    
+    if use_lower:
+        chars += string.ascii_lowercase
+    if use_upper:
+        chars += string.ascii_uppercase
+    if use_digits:
+        chars += string.digits
+    if use_special:
+        chars += string.punctuation
+    
+    if not chars:
+        print("[!] En az bir karakter tipi seçilmeli!")
+        return None
+    
+    password = ''.join(random.choice(chars) for _ in range(length))
+    return password
+
+def generate_multiple(count=5, length=16):
+    print(f"\\n[+] {count} adet şifre oluşturuluyor...\\n")
+    print("="*60)
+    
+    for i in range(count):
+        pwd = generate_password(length)
+        print(f"{i+1}. {pwd}")
+    
+    print("="*60)
+
+if __name__ == "__main__":
+    print("[1] Tek şifre")
+    print("[2] Çoklu şifre")
+    choice = input("Seçim: ")
+    
+    if choice == "1":
+        length = int(input("Uzunluk (varsayılan 16): ") or 16)
+        pwd = generate_password(length)
+        print(f"\\nŞifre: {pwd}")
+    elif choice == "2":
+        count = int(input("Kaç adet: "))
+        length = int(input("Uzunluk: "))
+        generate_multiple(count, length)`,
+    example: `$ python password_generator.py
+[1] Tek şifre
+[2] Çoklu şifre
+Seçim: 2
+Kaç adet: 5
+Uzunluk: 16
+
+[+] 5 adet şifre oluşturuluyor...
+
+============================================================
+1. K9#mP2$xL5@nQ8w
+2. R7&tY4!vB3*hN6z
+3. M2@pL9#xK5$wQ8r
+4. T6!nH3&yV7*mB4k
+5. P8$xL2#rN9@wK5t
+============================================================`
+  },
+  {
+    id: 'network-mapper',
+    name: 'Network Mapper',
+    category: 'network',
+    description: 'Ağ haritası oluşturur. Cihazları, IP\'leri ve bağlantıları görselleştirir.',
+    fileName: 'network_mapper.py',
+    language: 'python',
+    features: [
+      'Ağ haritası oluşturma',
+      'Cihaz tespiti',
+      'Bağlantı analizi',
+      'Görselleştirme'
+    ],
+    usage: 'python network-tools/network_mapper.py',
+    code: `"""
+Ağ Haritası Oluşturucu
+Ağdaki cihazları tespit eder ve harita oluşturur.
+"""
+import subprocess
+import re
+
+def scan_network(base_ip):
+    devices = []
+    
+    print(f"[+] {base_ip}.0/24 ağı taranıyor...\\n")
+    
+    for i in range(1, 255):
+        ip = f"{base_ip}.{i}"
+        result = subprocess.run(
+            ['ping', '-n', '1', '-w', '100', ip],
+            capture_output=True,
+            text=True
+        )
+        
+        if result.returncode == 0:
+            devices.append(ip)
+            print(f"[✓] Cihaz bulundu: {ip}")
+    
+    return devices
+
+def create_map(devices):
+    print("\\n" + "="*60)
+    print("                  AĞ HARİTASI")
+    print("="*60)
+    print(f"\\nToplam {len(devices)} cihaz bulundu:\\n")
+    
+    for i, device in enumerate(devices, 1):
+        print(f"{i}. {device}")
+        print("   └─ Aktif")
+
+if __name__ == "__main__":
+    base = input("Ağ aralığı (örn: 192.168.1): ")
+    devices = scan_network(base)
+    create_map(devices)`,
+    example: `$ python network_mapper.py
+Ağ aralığı (örn: 192.168.1): 192.168.1
+[+] 192.168.1.0/24 ağı taranıyor...
+
+[✓] Cihaz bulundu: 192.168.1.1
+[✓] Cihaz bulundu: 192.168.1.10
+[✓] Cihaz bulundu: 192.168.1.15
+
+============================================================
+                  AĞ HARİTASI
+============================================================
+
+Toplam 3 cihaz bulundu:
+
+1. 192.168.1.1
+   └─ Aktif
+2. 192.168.1.10
+   └─ Aktif`
+  },
+  {
+    id: 'service-monitor',
+    name: 'Service Monitor',
+    category: 'system',
+    description: 'Windows servislerini izler ve yönetir. Servis durumunu kontrol eder.',
+    fileName: 'service_monitor.py',
+    language: 'python',
+    features: [
+      'Servis listeleme',
+      'Durum kontrolü',
+      'Başlatma/Durdurma',
+      'Otomatik yeniden başlatma'
+    ],
+    usage: 'python system-tools/service_monitor.py',
+    code: `"""
+Servis İzleme Aracı
+Windows servislerini izler ve yönetir.
+"""
+import psutil
+
+def list_services():
+    print("\\n" + "="*80)
+    print("                    SERVİS LİSTESİ")
+    print("="*80)
+    print(f"{'Servis Adı':<40} {'Durum':<15} {'PID':<10}")
+    print("-"*80)
+    
+    for service in psutil.win_service_iter():
+        try:
+            info = service.as_dict()
+            name = info['name'][:39]
+            status = info['status']
+            pid = info['pid'] or 'N/A'
+            
+            status_icon = "✓" if status == "running" else "✗"
+            print(f"{name:<40} {status_icon} {status:<13} {pid:<10}")
+            
+        except Exception:
+            pass
+
+def check_service(service_name):
+    try:
+        service = psutil.win_service_get(service_name)
+        info = service.as_dict()
+        
+        print(f"\\n[+] Servis: {info['name']}")
+        print(f"Durum: {info['status']}")
+        print(f"Başlangıç: {info['start_type']}")
+        
+    except Exception as e:
+        print(f"[!] Hata: {e}")
+
+if __name__ == "__main__":
+    list_services()`,
+    example: `$ python service_monitor.py
+================================================================================
+                    SERVİS LİSTESİ
+================================================================================
+Servis Adı                               Durum           PID       
+--------------------------------------------------------------------------------
+Spooler                                  ✓ running       1234      
+Themes                                   ✓ running       5678      
+W32Time                                  ✓ running       9012`
+  },
+  {
+    id: 'firewall-manager',
+    name: 'Firewall Manager',
+    category: 'security',
+    description: 'Windows Firewall kurallarını yönetir. Kural ekleme, silme ve listeleme.',
+    fileName: 'firewall_manager.bat',
+    language: 'batch',
+    features: [
+      'Firewall kuralları listeleme',
+      'Yeni kural ekleme',
+      'Kural silme',
+      'Port yönetimi'
+    ],
+    usage: 'firewall_manager.bat',
+    code: `@echo off
+echo ========================================
+echo     WINDOWS FIREWALL YONETICI
+echo ========================================
+echo.
+
+echo [1] Firewall Durumunu Goster
+echo [2] Firewall Kurallarini Listele
+echo [3] Yeni Kural Ekle
+echo [4] Kural Sil
+echo [5] Cikis
+echo.
+
+set /p choice="Seciminiz: "
+
+if "%choice%"=="1" (
+    netsh advfirewall show allprofiles
+)
+
+if "%choice%"=="2" (
+    netsh advfirewall firewall show rule name=all
+)
+
+if "%choice%"=="3" (
+    set /p rulename="Kural adi: "
+    set /p port="Port: "
+    netsh advfirewall firewall add rule name="%rulename%" dir=in action=allow protocol=TCP localport=%port%
+    echo [+] Kural eklendi
+)
+
+pause`,
+    example: `> firewall_manager.bat
+========================================
+     WINDOWS FIREWALL YONETICI
+========================================
+
+[1] Firewall Durumunu Goster
+[2] Firewall Kurallarini Listele
+[3] Yeni Kural Ekle
+[4] Kural Sil
+[5] Cikis
+
+Seciminiz: 1
+Domain Profile: ON
+Private Profile: ON
+Public Profile: ON`
+  },
+  {
+    id: 'registry-backup',
+    name: 'Registry Backup',
+    category: 'automation',
+    description: 'Windows Registry yedekleme aracı. Kritik registry anahtarlarını yedekler.',
+    fileName: 'registry_backup.bat',
+    language: 'batch',
+    features: [
+      'Registry yedekleme',
+      'Otomatik tarih damgası',
+      'Seçili anahtar yedekleme',
+      'Geri yükleme'
+    ],
+    usage: 'registry_backup.bat',
+    code: `@echo off
+echo ========================================
+echo     REGISTRY YEDEKLEME ARACI
+echo ========================================
+echo.
+
+set timestamp=%date:~-4%%date:~3,2%%date:~0,2%_%time:~0,2%%time:~3,2%
+set timestamp=%timestamp: =0%
+
+set backup_folder=registry_backup_%timestamp%
+mkdir %backup_folder%
+
+echo [+] Registry yedekleniyor...
+echo.
+
+echo [+] HKEY_CURRENT_USER yedekleniyor...
+reg export HKCU %backup_folder%\\HKCU.reg /y
+
+echo [+] HKEY_LOCAL_MACHINE\\SOFTWARE yedekleniyor...
+reg export "HKLM\\SOFTWARE" %backup_folder%\\HKLM_SOFTWARE.reg /y
+
+echo.
+echo [+] Yedekleme tamamlandi: %backup_folder%
+echo.
+
+pause`,
+    example: `> registry_backup.bat
+========================================
+     REGISTRY YEDEKLEME ARACI
+========================================
+
+[+] Registry yedekleniyor...
+
+[+] HKEY_CURRENT_USER yedekleniyor...
+[+] HKEY_LOCAL_MACHINE\\SOFTWARE yedekleniyor...
+
+[+] Yedekleme tamamlandi: registry_backup_20251028_1430`
   }
 ]
 

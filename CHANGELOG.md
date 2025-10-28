@@ -2,9 +2,143 @@
 
 Tüm önemli değişiklikler bu dosyada belgelenecektir.
 
-## [1.1.0] - 2025-10-28
+## [2.2.0] - 2025-10-29
 
-### Added (Eklenenler)
+### 🚀 Major Features
+
+#### Added (Eklenenler)
+- 🤖 **Araç İstek Sistemi** - Telegram Bot Entegrasyonu
+  - `/submit-tool` sayfası ile kullanıcılar araç önerisi gönderebilir
+  - Form alanları: İsim, Kategori, Dil, Açıklama, Kullanım, Özellikler, Kod
+  - Telegram'a otomatik bildirim gönderimi
+  - Inline keyboard ile ✅ Onayla / ❌ Reddet butonları
+  - Başarı ekranı ve hata yönetimi
+- 📄 **Pagination Sistemi** - Ana sayfada sayfalama
+  - 9 araç/sayfa gösterimi
+  - Sayfa numaraları ile geçiş
+  - İleri/Geri ok butonları
+  - Responsive tasarım
+- ✨ **Text Generate Effect** - Hero section animasyonu
+  - Kelime kelime animasyonlu metin
+  - Blur efekti ile yumuşak geçiş
+  - Açıklama metni için kullanıldı
+- 📱 **Mobil Optimizasyonlar**
+  - Tool detay sayfasında etiketler responsive
+  - Mobilde yan yana, masaüstünde alt alta
+  - Uzun dosya isimleri için break-all
+  - Padding ve font boyutları optimize edildi
+- 🎨 **Footer Yenilendi**
+  - Minimal tek satır tasarım
+  - Sosyal medya ikonları (GitHub, Website, Instagram, X)
+  - SVG ikonlar ile daha profesyonel görünüm
+  - Copyright ve lisans bilgileri
+
+#### Changed (Değişiklikler)
+- 🎯 **Header Güncellendi**
+  - "Araç Öner" butonu eklendi
+  - GitHub butonu ile yan yana
+  - Daha iyi navigasyon
+- 🎨 **Ana Sayfa**
+  - "IT Toolkit" başlığı sabit
+  - Dönen kelimeler ayrı component
+  - Text generate effect ile açıklama
+  - Pagination ile daha düzenli görünüm
+- 🔧 **Form Placeholder'ları**
+  - Tüm placeholder'lar gri renk (text-gray-400)
+  - Daha iyi okunabilirlik
+  - Tutarlı görünüm
+
+#### Technical
+- 📦 Yeni API endpoint:
+  - `/api/submit-tool` - POST endpoint
+  - Telegram API entegrasyonu
+  - Form validation
+  - Error handling
+- 🎨 Yeni sayfalar:
+  - `/submit-tool` - Araç istek formu
+  - Başarı ekranı
+  - Loading states
+- 📝 Environment variables:
+  - `TELEGRAM_BOT_TOKEN` - Bot token
+  - `TELEGRAM_CHAT_ID` - Chat ID
+  - `.env.example` dosyası eklendi
+- 🔧 Yeni componentler:
+  - `components/ui/text-generate-effect.tsx`
+  - Pagination butonları (inline)
+
+#### Fixed (Düzeltmeler)
+- ✅ Pagination ok renkleri düzeltildi (text-black eklendi)
+- ✅ Mobilde tool detay etiketleri sığmama sorunu çözüldü
+- ✅ Form placeholder renkleri düzeltildi
+- ✅ Text generate effect useEffect dependency uyarısı giderildi
+
+#### Documentation
+- 📚 README güncellendi:
+  - Telegram bot kurulum talimatları
+  - Environment variables açıklaması
+  - Yeni özellikler eklendi
+  - Proje yapısı güncellendi
+- 📝 CHANGELOG detaylandırıldı
+
+---
+
+## [2.1.0] - 2025-10-29
+
+### 🎨 UI/UX İyileştirmeleri
+
+#### Added (Eklenenler)
+- ✨ **Animasyonlu Hero Section** - Framer Motion ile dinamik metin animasyonu
+  - "IT Toolkit - " sabit metin
+  - Dönen kelimeler: "Ağ Yönetimi", "Sistem Kontrolü", "Güvenlik Testleri", "Otomasyon"
+  - Yumuşak geçiş efektleri (blur + slide)
+- 🎭 **Modal Animasyonları** - Kaynak kod modal penceresi için açılış animasyonları
+  - Fade-in efekti (backdrop)
+  - Slide-up efekti (modal)
+  - 0.2s-0.3s yumuşak geçişler
+- 📱 **Mobil İyileştirmesi** - Kod bloklarında yatay kaydırma desteği
+  - `overflow-x-auto` ile mobilde sağa kaydırma
+  - Daha iyi kod görüntüleme deneyimi
+
+#### Changed (Değişiklikler)
+- 🔤 **Font Denemeleri** - Farklı pixel fontlar test edildi
+  - Press Start 2P (çok pixel)
+  - VT323 (çok küçük)
+  - Pixelify Sans (el yazısı gibi)
+  - Silkscreen (çok geometrik)
+  - **Sonuç**: Inter fontunda karar kılındı (okunabilir ve modern)
+
+#### Technical
+- 📦 Yeni bağımlılıklar:
+  - `framer-motion` - Animasyon kütüphanesi
+  - `clsx` - Koşullu className yönetimi
+  - `tailwind-merge` - Tailwind class birleştirme
+- 🎨 Yeni componentler:
+  - `components/ui/layout-text-flip.tsx` - Animasyonlu metin componenti
+  - `lib/utils.ts` - cn() utility fonksiyonu
+- 🎬 Yeni animasyonlar (globals.css):
+  - `@keyframes fadeIn` - Opacity geçişi
+  - `@keyframes slideUp` - Yukarı kayma efekti
+  - `.animate-fadeIn` ve `.animate-slideUp` sınıfları
+
+#### Fixed (Düzeltmeler)
+- ✅ Kod modal penceresinde mobil kaydırma sorunu düzeltildi
+- ✅ Modal açılış animasyonları eklendi (daha profesyonel görünüm)
+
+---
+
+## [2.0.0] - 2025-10-28
+
+### 🎉 Major Update - Web Platform
+
+#### Added (Eklenenler)
+- 🌐 Modern web platformu (Next.js 15 + TypeScript)
+- 🎨 Minimal siyah-beyaz tasarım
+- 📱 Tam responsive tasarım
+- 🔍 SEO optimized
+- 🎯 Header component (sticky navigation)
+- 💻 Kod modal penceresi (popup ile kaynak kod görüntüleme)
+- 🔗 GitHub Actions CI/CD
+- 📄 Issue ve PR templates
 - 🆕 5 yeni araç eklendi (toplam 13 araç)
   - MAC Scanner (Network) - ARP tablosu MAC adresleri
   - SSL Checker (Security) - SSL sertifika kontrolü
@@ -12,18 +146,44 @@ Tüm önemli değişiklikler bu dosyada belgelenecektir.
   - Bulk Renamer (Automation) - Toplu dosya yeniden adlandırma
   - Email Notifier (Automation) - SMTP email gönderici
 
-### Changed (Değişiklikler)
-- 📄 Ana sayfa "Öne Çıkan Araçlar" → "Tüm Araçlar" (13 araç gösteriliyor)
-- 🎨 Header border ince gri yapıldı (daha minimal)
-- 🎨 Footer border ince gri yapıldı (daha minimal)
-- 🔄 Footer Twitter ikonu → X ikonu güncellendi
+#### Changed (Değişiklikler)
+- 📄 Ana sayfa sadeleştirildi (istatistik ve kategori kartları kaldırıldı)
+- 📄 "Öne Çıkan Araçlar" → "Tüm Araçlar" (13 araç gösteriliyor)
+- 🎨 Header border minimal yapıldı
+- 🔄 Footer kaldırıldı (daha minimal görünüm)
+- 🔄 Sosyal medya ikonları güncellendi (Twitter → X)
 - 📊 Sayfa sayısı 16 → 21'e çıktı
+- 🎨 Tüm başlıklar siyah yapıldı (gri değil)
+
+#### Removed (Kaldırılanlar)
+- ❌ Footer component (minimal tasarım için)
+- ❌ İstatistik kartları (8 Araç, 4 Kategori, vb.)
+- ❌ Kategori kartları (ana sayfadan)
 
 ### Technical
+- Framework: Next.js 15 (App Router)
+- Language: TypeScript 5
+- Styling: Tailwind CSS 4
+- Icons: Lucide React
 - Build: ✅ Başarılı
 - TypeScript: ✅ Hatasız
 - Araç sayısı: 8 → 13 (+5)
 - Sayfa sayısı: 16 → 21 (+5)
+
+---
+
+## [1.0.0] - 2025-10-27
+
+### 🎉 İlk Sürüm (Python/Batch Scriptleri)
+
+#### Added (Eklenenler)
+- 📦 29 farklı IT aracı
+- 🌐 Network Tools (6 araç)
+- 💻 System Tools (7 araç)
+- 🔒 Security Tools (6 araç)
+- ⚙️ Automation (6 araç)
+- 📚 Türkçe dokümantasyon
+- 🆓 MIT Lisansı
 
 ---
 

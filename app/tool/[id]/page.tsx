@@ -33,25 +33,25 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
         </Link>
 
         {/* Header */}
-        <div className="bg-white rounded-xl p-8 border-2 border-black mb-8">
-          <div className="flex items-start justify-between mb-6">
-            <div>
+        <div className="bg-white rounded-xl p-4 md:p-8 border-2 border-black mb-8">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+            <div className="flex-1">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-5xl">{category.icon}</span>
+                <span className="text-4xl md:text-5xl">{category.icon}</span>
                 <div>
-                  <h1 className="text-4xl font-bold text-black">{tool.name}</h1>
-                  <p className="text-gray-600 mt-2">{category.name}</p>
+                  <h1 className="text-2xl md:text-4xl font-bold text-black">{tool.name}</h1>
+                  <p className="text-gray-600 mt-1 md:mt-2 text-sm md:text-base">{category.name}</p>
                 </div>
               </div>
-              <p className="text-xl text-gray-700 max-w-3xl">
+              <p className="text-base md:text-xl text-gray-700">
                 {tool.description}
               </p>
             </div>
-            <div className="flex flex-col gap-2">
-              <span className="px-4 py-2 bg-gray-200 text-black rounded-lg text-sm font-medium">
+            <div className="flex flex-row md:flex-col gap-2">
+              <span className="px-3 md:px-4 py-2 bg-gray-200 text-black rounded-lg text-xs md:text-sm font-medium whitespace-nowrap">
                 {tool.language}
               </span>
-              <span className="px-4 py-2 bg-black text-white rounded-lg text-sm font-medium text-center">
+              <span className="px-3 md:px-4 py-2 bg-black text-white rounded-lg text-xs md:text-sm font-medium text-center break-all md:break-normal">
                 {tool.fileName}
               </span>
             </div>

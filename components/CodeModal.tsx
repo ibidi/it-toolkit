@@ -33,15 +33,15 @@ export default function CodeModal({ isOpen, onClose, code, title }: CodeModalPro
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fadeIn">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black bg-opacity-50"
+        className="absolute inset-0 bg-black bg-opacity-50 animate-fadeIn"
         onClick={onClose}
       />
       
       {/* Modal */}
-      <div className="relative bg-white rounded-xl border-2 border-black max-w-4xl w-full max-h-[90vh] flex flex-col">
+      <div className="relative bg-white rounded-xl border-2 border-black max-w-4xl w-full max-h-[90vh] flex flex-col animate-slideUp">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b-2 border-black">
           <h3 className="text-xl font-bold text-black">{title}</h3>
@@ -69,7 +69,7 @@ export default function CodeModal({ isOpen, onClose, code, title }: CodeModalPro
 
         {/* Code Content */}
         <div className="flex-1 overflow-auto p-6">
-          <div className="bg-black rounded-lg p-6">
+          <div className="bg-black rounded-lg p-6 overflow-x-auto">
             <pre className="text-sm">
               <code className="text-green-400 font-mono whitespace-pre">
                 {code}

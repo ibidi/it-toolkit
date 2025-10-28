@@ -2,19 +2,24 @@
 
 Modern, minimal ve responsive bir web sitesi ile IT araçlarını sergileyin. Python ve Batch scriptlerinden oluşan IT Toolkit koleksiyonunu görsel olarak sunar.
 
-![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-ff0055)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## 🎯 Özellikler
 
 - ✅ **Modern Tasarım** - Minimal siyah-beyaz tema
+- ✅ **Animasyonlu Hero** - Framer Motion ile dinamik metin animasyonları
+- ✅ **Araç İstek Sistemi** - Telegram bot entegrasyonu ile araç önerileri
 - ✅ **Responsive** - Mobil, tablet, desktop uyumlu
 - ✅ **Kod Gösterimi** - Syntax highlighting ve kopyalama özelliği
+- ✅ **Modal Animasyonları** - Yumuşak açılış/kapanış efektleri
+- ✅ **Pagination** - Sayfalı araç listesi (9 araç/sayfa)
 - ✅ **Kategorize Edilmiş** - Network, System, Security, Automation
 - ✅ **SEO Optimized** - Static site generation
-- ✅ **Hızlı** - Next.js 15 ile optimize edilmiş
+- ✅ **Hızlı** - Next.js 16 ile optimize edilmiş
 
 ## 🚀 Hızlı Başlangıç
 
@@ -39,6 +44,10 @@ cd it-toolkit
 # Bağımlılıkları yükle
 npm install
 
+# Environment variables ayarla
+cp .env.example .env.local
+# .env.local dosyasını düzenleyip Telegram bot bilgilerinizi ekleyin
+
 # Geliştirme modunda çalıştır
 npm run dev
 
@@ -47,18 +56,50 @@ npm run build
 npm start
 ```
 
+### 🤖 Telegram Bot Kurulumu
+
+Araç istek sistemi için Telegram bot kurulumu:
+
+1. **Bot Oluştur**
+   - [@BotFather](https://t.me/BotFather) ile konuşun
+   - `/newbot` komutunu kullanın
+   - Bot token'ınızı alın
+
+2. **Chat ID Öğren**
+   - [@userinfobot](https://t.me/userinfobot) ile konuşun
+   - Chat ID'nizi kopyalayın
+
+3. **Environment Variables**
+   ```env
+   TELEGRAM_BOT_TOKEN=your_bot_token_here
+   TELEGRAM_CHAT_ID=your_chat_id_here
+   ```
+
+4. **Test Edin**
+   - `/submit-tool` sayfasına gidin
+   - Bir araç önerisi gönderin
+   - Telegram'da bildirimi kontrol edin
+
 ## 📁 Proje Yapısı
 
 ```
 .
 ├── app/                        # Next.js App Router
-│   ├── page.tsx               # Ana sayfa
+│   ├── page.tsx               # Ana sayfa (animasyonlu hero)
+│   ├── layout.tsx             # Root layout
+│   ├── globals.css            # Global styles & animations
 │   ├── tool/[id]/             # Araç detay sayfaları
 │   └── category/[slug]/       # Kategori sayfaları
 ├── components/                 # React bileşenleri
-│   └── CodeBlock.tsx          # Kod gösterimi
+│   ├── ui/                    # UI components
+│   │   └── layout-text-flip.tsx  # Animasyonlu metin
+│   ├── Header.tsx             # Navigation
+│   ├── Footer.tsx             # Footer
+│   ├── CodeModal.tsx          # Kod modal (animasyonlu)
+│   └── CodeModalButton.tsx    # Modal trigger
 ├── lib/                       # Yardımcı fonksiyonlar
-│   └── tools-data.ts          # Araç verileri
+│   ├── tools-data.ts          # Araç verileri
+│   └── utils.ts               # Utility functions (cn)
 ├── documents/                 # Dokümantasyon
 │   └── original-tools/        # Orijinal Python/Batch araçları
 └── public/                    # Statik dosyalar
@@ -75,7 +116,7 @@ npm start
 - **Disk Analyzer** - Disk kullanım analizi
 - **Process Manager** - İşlem yönetimi
 
-### � Security oTools
+### 🔒 Security Tools
 - **Hash Generator** - MD5, SHA256 vb. hash oluşturma
 - **Port Scanner** - TCP port tarama
 - **Login Monitor** - Brute force koruması
@@ -86,9 +127,10 @@ npm start
 
 ## 🔧 Teknolojiler
 
-- **Framework**: [Next.js 15](https://nextjs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Framework**: [Next.js 16](https://nextjs.org/)
+- **Language**: [TypeScript 5](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Animation**: [Framer Motion](https://www.framer.com/motion/)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Deployment**: [Vercel](https://vercel.com/)
 
