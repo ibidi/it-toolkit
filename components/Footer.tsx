@@ -3,7 +3,7 @@ import { Code2, Globe, Github, Instagram, X } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t-2 border-black mt-20">
+    <footer className="bg-white border-t border-gray-200 mt-20">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -97,7 +97,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t-2 border-black pt-8 text-center">
+        <div className="border-t border-gray-200 pt-8 text-center">
           <p className="text-gray-600">
             © {new Date().getFullYear()} IT Toolkit. Made with ❤️ by{' '}
             <a href="https://ihsanbakidogan.com" target="_blank" rel="noopener noreferrer" className="text-black font-semibold hover:underline">

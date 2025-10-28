@@ -2,6 +2,31 @@
 
 Tüm önemli değişiklikler bu dosyada belgelenecektir.
 
+## [1.1.0] - 2025-10-28
+
+### Added (Eklenenler)
+- 🆕 5 yeni araç eklendi (toplam 13 araç)
+  - MAC Scanner (Network) - ARP tablosu MAC adresleri
+  - SSL Checker (Security) - SSL sertifika kontrolü
+  - Process Manager (System) - İşlem yönetimi
+  - Bulk Renamer (Automation) - Toplu dosya yeniden adlandırma
+  - Email Notifier (Automation) - SMTP email gönderici
+
+### Changed (Değişiklikler)
+- 📄 Ana sayfa "Öne Çıkan Araçlar" → "Tüm Araçlar" (13 araç gösteriliyor)
+- 🎨 Header border ince gri yapıldı (daha minimal)
+- 🎨 Footer border ince gri yapıldı (daha minimal)
+- 🔄 Footer Twitter ikonu → X ikonu güncellendi
+- 📊 Sayfa sayısı 16 → 21'e çıktı
+
+### Technical
+- Build: ✅ Başarılı
+- TypeScript: ✅ Hatasız
+- Araç sayısı: 8 → 13 (+5)
+- Sayfa sayısı: 16 → 21 (+5)
+
+---
+
 ## [1.0.0] - 2025-10-28
 
 ### ✨ İlk Sürüm
