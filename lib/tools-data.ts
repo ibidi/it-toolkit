@@ -9,9 +9,18 @@ export interface Tool {
   usage: string
   code: string
   example: string
+  isPending?: boolean
 }
 
-export const tools: Tool[] = [
+// Pending tools'u yükle
+let pendingTools: Tool[] = []
+try {
+  pendingTools = require('./pending-tools.json')
+} catch {
+  // Dosya yoksa boş array
+}
+
+const staticTools: Tool[] = [
   // Network Tools
   {
     id: 'ip-scanner',
@@ -1486,3 +1495,6 @@ export const categories = {
     color: 'purple'
   }
 }
+
+// Static tools ile pending tools'u birleştir
+export const tools: Tool[] = [...staticTools, ...pendingTools]
