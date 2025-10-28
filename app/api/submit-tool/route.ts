@@ -69,8 +69,11 @@ _Tam kodu görmek için web paneline bakın_
       }
     )
 
+    const telegramData = await telegramResponse.json()
+
     if (!telegramResponse.ok) {
-      throw new Error('Telegram API hatası')
+      console.error('Telegram API error:', telegramData)
+      throw new Error(`Telegram API hatası: ${telegramData.description || 'Bilinmeyen hata'}`)
     }
 
     return NextResponse.json({
