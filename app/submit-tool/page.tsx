@@ -146,12 +146,12 @@ export default function SubmitToolPage() {
                 value={formData.category}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
               >
-                <option value="network">Network Tools</option>
-                <option value="system">System Tools</option>
-                <option value="security">Security Tools</option>
-                <option value="automation">Automation</option>
+                <option value="network">Ağ Araçları</option>
+                <option value="system">Sistem Araçları</option>
+                <option value="security">Güvenlik Araçları</option>
+                <option value="automation">Otomasyon</option>
               </select>
             </div>
 
@@ -166,7 +166,7 @@ export default function SubmitToolPage() {
                 value={formData.language}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black"
               >
                 <option value="python">Python</option>
                 <option value="batch">Batch</option>

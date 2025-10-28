@@ -30,6 +30,9 @@ jobs:
       run: npm run lint
     
     - name: Build
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || 'dummy_token_for_build' }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || 'dummy_chat_id_for_build' }}
       run: npm run build
     
     - name: Check build output

@@ -10,10 +10,32 @@ export function generateStaticParams() {
   }))
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const tool = tools.find(t => t.id === id)
+
+  if (!tool) {
+    return {}
+  }
+
+  const category = categories[tool.category]
+
+  return {
+    title: `${tool.name} - ${category.name}`,
+    description: `${tool.description} ${tool.language} ile yazılmış ${category.name} aracı.`,
+    keywords: [tool.name, tool.language, category.name, tool.category, 'IT tools', ...tool.features],
+    openGraph: {
+      title: `${tool.name} - IT Toolkit`,
+      description: tool.description,
+      type: 'article',
+    },
+  }
+}
+
 export default async function ToolPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const tool = tools.find(t => t.id === id)
-  
+
   if (!tool) {
     notFound()
   }

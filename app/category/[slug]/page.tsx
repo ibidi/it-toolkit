@@ -9,6 +9,28 @@ export function generateStaticParams() {
   }))
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const category = categories[slug as keyof typeof categories]
+  
+  if (!category) {
+    return {}
+  }
+
+  const categoryTools = tools.filter(t => t.category === slug)
+
+  return {
+    title: `${category.name} - IT Toolkit`,
+    description: `${category.description} ${categoryTools.length} araç mevcut.`,
+    keywords: [category.name, 'IT tools', slug, 'bilgi işlem araçları'],
+    openGraph: {
+      title: `${category.name} - IT Toolkit`,
+      description: category.description,
+      type: 'website',
+    },
+  }
+}
+
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const category = categories[slug as keyof typeof categories]
