@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 
 function parseToolFromMessage(text: string) {
   const lines = text.split('\n')
-  const data: any = {}
+  const data: Record<string, string> = {}
   
   lines.forEach(line => {
     if (line.includes('*İsim:*')) data.name = line.split('*İsim:*')[1].trim()
@@ -61,14 +61,14 @@ function parseToolFromMessage(text: string) {
   return data
 }
 
-async function addPendingTool(toolData: any) {
+async function addPendingTool(toolData: Record<string, string | boolean>) {
   const filePath = path.join(process.cwd(), 'lib', 'pending-tools.json')
   let pendingTools = []
   
   try {
     const fileContent = fs.readFileSync(filePath, 'utf-8')
     pendingTools = JSON.parse(fileContent)
-  } catch (error) {
+  } catch {
     // File doesn't exist or is empty
   }
   

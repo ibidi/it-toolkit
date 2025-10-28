@@ -15,6 +15,7 @@ export interface Tool {
 // Pending tools'u yükle
 let pendingTools: Tool[] = []
 try {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   pendingTools = require('./pending-tools.json')
 } catch {
   // Dosya yoksa boş array
