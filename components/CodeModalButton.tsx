@@ -7,9 +7,10 @@ import CodeModal from './CodeModal'
 interface CodeModalButtonProps {
   code: string
   title: string
+  language?: string
 }
 
-export default function CodeModalButton({ code, title }: CodeModalButtonProps) {
+export default function CodeModalButton({ code, title, language = 'python' }: CodeModalButtonProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -27,6 +28,7 @@ export default function CodeModalButton({ code, title }: CodeModalButtonProps) {
         onClose={() => setIsOpen(false)}
         code={code}
         title={title}
+        language={language}
       />
     </>
   )

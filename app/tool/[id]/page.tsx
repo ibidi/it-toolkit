@@ -109,7 +109,7 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
               <h2 className="text-2xl font-bold text-black">Kaynak Kod</h2>
             </div>
           </div>
-          <CodeModalButton code={tool.code} title={`${tool.name} - Kaynak Kod`} />
+          <CodeModalButton code={tool.code} title={`${tool.name} - Kaynak Kod`} language={tool.language} />
         </div>
 
         {/* Example Output */}

@@ -2,15 +2,18 @@
 
 import { X, Copy, Check } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 interface CodeModalProps {
   isOpen: boolean
   onClose: () => void
   code: string
   title: string
+  language?: string
 }
 
-export default function CodeModal({ isOpen, onClose, code, title }: CodeModalProps) {
+export default function CodeModal({ isOpen, onClose, code, title, language = 'python' }: CodeModalProps) {
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
@@ -41,41 +44,46 @@ export default function CodeModal({ isOpen, onClose, code, title }: CodeModalPro
       />
       
       {/* Modal */}
-      <div className="relative bg-white rounded-xl border-2 border-black max-w-4xl w-full max-h-[90vh] flex flex-col animate-slideUp">
+      <div className="relative bg-white dark:bg-gray-900 rounded-xl border-2 border-black dark:border-white max-w-4xl w-full max-h-[90vh] flex flex-col animate-slideUp">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b-2 border-black">
-          <h3 className="text-xl font-bold text-black">{title}</h3>
+        <div className="flex items-center justify-between p-6 border-b-2 border-black dark:border-white">
+          <h3 className="text-xl font-bold text-black dark:text-white">{title}</h3>
           <div className="flex items-center gap-2">
             <button
               onClick={copyToClipboard}
-              className="p-2 bg-white border-2 border-black hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 bg-white dark:bg-gray-800 border-2 border-black dark:border-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
               title="Kodu kopyala"
             >
               {copied ? (
                 <Check className="text-green-600" size={20} />
               ) : (
-                <Copy className="text-black" size={20} />
+                <Copy className="text-black dark:text-white" size={20} />
               )}
             </button>
             <button
               onClick={onClose}
-              className="p-2 bg-white border-2 border-black hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 bg-white dark:bg-gray-800 border-2 border-black dark:border-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
               title="Kapat"
             >
-              <X className="text-black" size={20} />
+              <X className="text-black dark:text-white" size={20} />
             </button>
           </div>
         </div>
 
         {/* Code Content */}
         <div className="flex-1 overflow-auto p-6">
-          <div className="bg-black rounded-lg p-6 overflow-x-auto">
-            <pre className="text-sm">
-              <code className="text-green-400 font-mono whitespace-pre">
-                {code}
-              </code>
-            </pre>
-          </div>
+          <SyntaxHighlighter
+            language={language}
+            style={vscDarkPlus}
+            customStyle={{
+              margin: 0,
+              borderRadius: '0.5rem',
+              fontSize: '0.875rem',
+            }}
+            showLineNumbers
+          >
+            {code}
+          </SyntaxHighlighter>
         </div>
       </div>
     </div>
