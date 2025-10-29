@@ -17,14 +17,14 @@ export default function Home() {
   const currentTools = tools.slice(indexOfFirstTool, indexOfLastTool)
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-20">
         <div className="text-center mb-16">
           <div className="inline-block mb-6">
-            <Code2 className="w-20 h-20 text-black mx-auto" />
+            <Code2 className="w-20 h-20 text-black dark:text-white mx-auto" />
           </div>
-          <h1 className="text-6xl font-bold text-black mb-6">
+          <h1 className="text-6xl font-bold text-black dark:text-white mb-6">
             IT Toolkit
           </h1>
           <div className="flex flex-col items-center justify-center gap-4 mb-6">
@@ -34,7 +34,7 @@ export default function Home() {
               duration={2500}
             />
           </div>
-          <p className="text-2xl text-gray-700 mb-8">
+          <p className="text-2xl text-gray-700 dark:text-gray-300 mb-8">
             Bilgi İşlem Profesyonelleri için Pratik Araçlar
           </p>
           <div className="max-w-3xl mx-auto mb-12">
@@ -49,14 +49,14 @@ export default function Home() {
               href="https://github.com/ibidi"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+              className="inline-flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
             >
               <Github size={20} />
               GitHub&apos;da Görüntüle
             </a>
             <Link
               href="#tools"
-              className="inline-flex items-center gap-2 bg-white text-black border-2 border-black px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+              className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 text-black dark:text-white border-2 border-black dark:border-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               Araçları Keşfet
               <ArrowRight size={20} />
@@ -66,7 +66,7 @@ export default function Home() {
 
         {/* Featured Tools */}
         <div id="tools">
-          <h2 className="text-4xl font-bold text-black text-center mb-12">
+          <h2 className="text-4xl font-bold text-black dark:text-white text-center mb-12">
             Tüm Araçlar
           </h2>
           
@@ -75,23 +75,23 @@ export default function Home() {
               <Link
                 key={tool.id}
                 href={`/tool/${tool.id}`}
-                className="group bg-white rounded-xl p-6 border-2 border-black hover:bg-black hover:text-white transition-all"
+                className="group bg-white dark:bg-gray-800 rounded-xl p-6 border-2 border-black dark:border-white hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-all"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-black group-hover:text-white mb-2">
+                    <h3 className="text-xl font-bold text-black dark:text-white group-hover:text-white dark:group-hover:text-black mb-2">
                       {tool.name}
                     </h3>
-                    <span className="text-xs px-3 py-1 bg-gray-200 group-hover:bg-gray-700 text-black group-hover:text-white rounded-full">
+                    <span className="text-xs px-3 py-1 bg-gray-200 dark:bg-gray-700 group-hover:bg-gray-700 dark:group-hover:bg-gray-200 text-black dark:text-white group-hover:text-white dark:group-hover:text-black rounded-full">
                       {tool.language}
                     </span>
                   </div>
                   <span className="text-3xl">{categories[tool.category].icon}</span>
                 </div>
-                <p className="text-gray-600 group-hover:text-gray-300 text-sm mb-4 line-clamp-2">
+                <p className="text-gray-600 dark:text-gray-400 group-hover:text-gray-300 dark:group-hover:text-gray-600 text-sm mb-4 line-clamp-2">
                   {tool.description}
                 </p>
-                <div className="flex items-center text-sm font-medium text-black group-hover:text-white">
+                <div className="flex items-center text-sm font-medium text-black dark:text-white group-hover:text-white dark:group-hover:text-black">
                   Detayları Gör
                   <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" size={16} />
                 </div>
@@ -105,7 +105,7 @@ export default function Home() {
               <button
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="p-2 rounded-lg border-2 border-black text-black disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black hover:text-white transition-colors"
+                className="p-2 rounded-lg border-2 border-black dark:border-white text-black dark:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors"
               >
                 <ChevronLeft size={20} className="stroke-current" />
               </button>
@@ -114,10 +114,10 @@ export default function Home() {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`px-4 py-2 rounded-lg border-2 border-black font-semibold transition-colors ${
+                  className={`px-4 py-2 rounded-lg border-2 border-black dark:border-white font-semibold transition-colors ${
                     currentPage === page
-                      ? 'bg-black text-white'
-                      : 'bg-white text-black hover:bg-gray-100'
+                      ? 'bg-black dark:bg-white text-white dark:text-black'
+                      : 'bg-white dark:bg-gray-800 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
                   }`}
                 >
                   {page}
@@ -127,7 +127,7 @@ export default function Home() {
               <button
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="p-2 rounded-lg border-2 border-black text-black disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black hover:text-white transition-colors"
+                className="p-2 rounded-lg border-2 border-black dark:border-white text-black dark:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors"
               >
                 <ChevronRight size={20} className="stroke-current" />
               </button>
