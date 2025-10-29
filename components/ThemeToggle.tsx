@@ -21,15 +21,13 @@ export default function ThemeToggle() {
     )
   }
 
-  const currentTheme = theme === 'system' ? resolvedTheme : theme
-
   return (
     <button
-      onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       className="p-2 rounded-lg border-2 border-black dark:border-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
       aria-label="Toggle theme"
     >
-      {currentTheme === 'dark' ? (
+      {theme === 'dark' ? (
         <Sun className="w-5 h-5 text-black dark:text-white" />
       ) : (
         <Moon className="w-5 h-5 text-black dark:text-white" />

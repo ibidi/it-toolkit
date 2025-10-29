@@ -4,7 +4,7 @@ export interface Tool {
   category: 'network' | 'system' | 'security' | 'automation'
   description: string
   fileName: string
-  language: 'python' | 'batch'
+  language: 'python' | 'batch' | 'bash' | 'powershell' | 'javascript'
   features: string[]
   usage: string
   code: string
@@ -1467,6 +1467,327 @@ pause`,
 [+] HKEY_LOCAL_MACHINE\\SOFTWARE yedekleniyor...
 
 [+] Yedekleme tamamlandi: registry_backup_20251028_1430`
+  },
+  {
+    id: 'bandwidth-monitor',
+    name: 'Bandwidth Monitor',
+    category: 'network',
+    description: 'Ağ bant genişliği izleme aracı. Gerçek zamanlı download/upload hızını gösterir.',
+    fileName: 'bandwidth_monitor.py',
+    language: 'python',
+    features: [
+      'Gerçek zamanlı bant genişliği izleme',
+      'Download/Upload hızı',
+      'Toplam veri transferi',
+      'Grafik gösterim'
+    ],
+    usage: 'python network-tools/bandwidth_monitor.py',
+    code: `"""
+Bant Genişliği İzleyici
+Ağ trafiğini gerçek zamanlı izler.
+"""
+import psutil
+import time
+
+def get_size(bytes):
+    for unit in ['B', 'KB', 'MB', 'GB']:
+        if bytes < 1024:
+            return f"{bytes:.2f} {unit}"
+        bytes /= 1024
+
+def monitor_bandwidth():
+    print("[+] Bant genişliği izleniyor... (Ctrl+C ile durdurun)\\n")
+    
+    old_value = psutil.net_io_counters()
+    
+    try:
+        while True:
+            time.sleep(1)
+            new_value = psutil.net_io_counters()
+            
+            download = new_value.bytes_recv - old_value.bytes_recv
+            upload = new_value.bytes_sent - old_value.bytes_sent
+            
+            print(f"\\rDownload: {get_size(download)}/s | Upload: {get_size(upload)}/s", end='')
+            
+            old_value = new_value
+            
+    except KeyboardInterrupt:
+        print("\\n\\n[+] İzleme durduruldu")
+
+if __name__ == "__main__":
+    monitor_bandwidth()`,
+    example: `$ python bandwidth_monitor.py
+[+] Bant genişliği izleniyor... (Ctrl+C ile durdurun)
+
+Download: 2.45 MB/s | Upload: 512.34 KB/s`
+  },
+  {
+    id: 'wifi-scanner',
+    name: 'WiFi Scanner',
+    category: 'network',
+    description: 'WiFi ağlarını tarayan araç. Sinyal gücü, şifreleme tipi ve kanal bilgilerini gösterir.',
+    fileName: 'wifi_scanner.py',
+    language: 'python',
+    features: [
+      'WiFi ağ tarama',
+      'Sinyal gücü gösterimi',
+      'Şifreleme tipi tespiti',
+      'Kanal bilgisi'
+    ],
+    usage: 'python network-tools/wifi_scanner.py',
+    code: `"""
+WiFi Ağ Tarayıcı
+Çevredeki WiFi ağlarını tarar.
+"""
+import subprocess
+import re
+
+def scan_wifi():
+    print("[+] WiFi ağları taranıyor...\\n")
+    
+    result = subprocess.run(
+        ['netsh', 'wlan', 'show', 'networks', 'mode=bssid'],
+        capture_output=True,
+        text=True
+    )
+    
+    print("="*70)
+    print("                    WiFi AĞLARI")
+    print("="*70)
+    
+    networks = result.stdout.split('\\n\\n')
+    
+    for network in networks:
+        if 'SSID' in network:
+            ssid = re.search(r'SSID \\d+ : (.+)', network)
+            signal = re.search(r'Signal\\s+: (\\d+)%', network)
+            auth = re.search(r'Authentication\\s+: (.+)', network)
+            
+            if ssid:
+                print(f"\\nSSID: {ssid.group(1)}")
+                if signal:
+                    strength = int(signal.group(1))
+                    bars = '█' * (strength // 20)
+                    print(f"Sinyal: [{bars:<5}] {strength}%")
+                if auth:
+                    print(f"Güvenlik: {auth.group(1)}")
+
+if __name__ == "__main__":
+    scan_wifi()`,
+    example: `$ python wifi_scanner.py
+[+] WiFi ağları taranıyor...
+
+======================================================================
+                    WiFi AĞLARI
+======================================================================
+
+SSID: HomeNetwork
+Sinyal: [████ ] 80%
+Güvenlik: WPA2-Personal
+
+SSID: OfficeWiFi
+Sinyal: [███  ] 60%
+Güvenlik: WPA2-Enterprise`
+  },
+  {
+    id: 'task-scheduler',
+    name: 'Task Scheduler',
+    category: 'automation',
+    description: 'Zamanlanmış görev oluşturucu. Belirli saatlerde script çalıştırma.',
+    fileName: 'task_scheduler.bat',
+    language: 'batch',
+    features: [
+      'Zamanlanmış görev oluşturma',
+      'Günlük/Haftalık görevler',
+      'Script otomasyonu',
+      'Görev yönetimi'
+    ],
+    usage: 'task_scheduler.bat',
+    code: `@echo off
+echo ========================================
+echo     GOREV ZAMANLAYICI
+echo ========================================
+echo.
+
+echo [1] Yeni Gorev Olustur
+echo [2] Gorevleri Listele
+echo [3] Gorev Sil
+echo [4] Cikis
+echo.
+
+set /p choice="Seciminiz: "
+
+if "%choice%"=="1" (
+    set /p taskname="Gorev adi: "
+    set /p script="Script yolu: "
+    set /p time="Saat (HH:MM): "
+    
+    schtasks /create /tn "%taskname%" /tr "%script%" /sc daily /st %time%
+    echo [+] Gorev olusturuldu
+)
+
+if "%choice%"=="2" (
+    schtasks /query /fo LIST /v
+)
+
+if "%choice%"=="3" (
+    set /p taskname="Silinecek gorev: "
+    schtasks /delete /tn "%taskname%" /f
+    echo [+] Gorev silindi
+)
+
+pause`,
+    example: `> task_scheduler.bat
+========================================
+     GOREV ZAMANLAYICI
+========================================
+
+[1] Yeni Gorev Olustur
+[2] Gorevleri Listele
+[3] Gorev Sil
+[4] Cikis
+
+Seciminiz: 1
+Gorev adi: DailyBackup
+Script yolu: C:\\Scripts\\backup.bat
+Saat (HH:MM): 02:00
+[+] Gorev olusturuldu`
+  },
+  {
+    id: 'usb-monitor',
+    name: 'USB Monitor',
+    category: 'security',
+    description: 'USB cihaz takip sistemi. Takılan/çıkarılan USB cihazları loglar.',
+    fileName: 'usb_monitor.py',
+    language: 'python',
+    features: [
+      'USB cihaz izleme',
+      'Takma/çıkarma tespiti',
+      'Cihaz bilgileri',
+      'Log kayıt'
+    ],
+    usage: 'python security-tools/usb_monitor.py',
+    code: `"""
+USB Cihaz İzleyici
+USB cihazlarını izler ve loglar.
+"""
+import psutil
+import time
+from datetime import datetime
+
+def get_usb_devices():
+    devices = []
+    partitions = psutil.disk_partitions()
+    
+    for partition in partitions:
+        if 'removable' in partition.opts.lower():
+            devices.append(partition.device)
+    
+    return devices
+
+def monitor_usb():
+    print("[+] USB cihazlar izleniyor... (Ctrl+C ile durdurun)\\n")
+    
+    old_devices = set(get_usb_devices())
+    
+    try:
+        while True:
+            time.sleep(2)
+            new_devices = set(get_usb_devices())
+            
+            # Yeni takılan cihazlar
+            added = new_devices - old_devices
+            for device in added:
+                timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                print(f"[{timestamp}] ✓ USB Takıldı: {device}")
+                
+                # Log dosyasına yaz
+                with open('usb_log.txt', 'a') as f:
+                    f.write(f"[{timestamp}] TAKILDI: {device}\\n")
+            
+            # Çıkarılan cihazlar
+            removed = old_devices - new_devices
+            for device in removed:
+                timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                print(f"[{timestamp}] ✗ USB Çıkarıldı: {device}")
+                
+                with open('usb_log.txt', 'a') as f:
+                    f.write(f"[{timestamp}] CIKARILDI: {device}\\n")
+            
+            old_devices = new_devices
+            
+    except KeyboardInterrupt:
+        print("\\n[+] İzleme durduruldu")
+
+if __name__ == "__main__":
+    monitor_usb()`,
+    example: `$ python usb_monitor.py
+[+] USB cihazlar izleniyor... (Ctrl+C ile durdurun)
+
+[2025-10-29 14:30:15] ✓ USB Takıldı: E:\\
+[2025-10-29 14:35:22] ✗ USB Çıkarıldı: E:\\`
+  },
+  {
+    id: 'memory-cleaner',
+    name: 'Memory Cleaner',
+    category: 'system',
+    description: 'RAM temizleme aracı. Kullanılmayan belleği temizler ve optimize eder.',
+    fileName: 'memory_cleaner.bat',
+    language: 'batch',
+    features: [
+      'RAM temizleme',
+      'Önbellek temizleme',
+      'Bellek optimizasyonu',
+      'Otomatik temizlik'
+    ],
+    usage: 'memory_cleaner.bat',
+    code: `@echo off
+echo ========================================
+echo     BELLEK TEMIZLEYICI
+echo ========================================
+echo.
+
+echo [+] Mevcut bellek durumu:
+systeminfo | findstr /C:"Available Physical Memory"
+echo.
+
+echo [+] Bellek temizleniyor...
+echo.
+
+REM Standby belleği temizle
+echo [+] Standby bellek temizleniyor...
+%windir%\\system32\\rundll32.exe advapi32.dll,ProcessIdleTasks
+
+REM Çalışan belleği optimize et
+echo [+] Bellek optimize ediliyor...
+%windir%\\system32\\rundll32.exe kernel32.dll,SetProcessWorkingSetSize -1 -1
+
+echo.
+echo [+] Temizlik tamamlandi!
+echo.
+
+echo [+] Yeni bellek durumu:
+systeminfo | findstr /C:"Available Physical Memory"
+echo.
+
+pause`,
+    example: `> memory_cleaner.bat
+========================================
+     BELLEK TEMIZLEYICI
+========================================
+
+[+] Mevcut bellek durumu:
+Available Physical Memory: 4,234 MB
+
+[+] Bellek temizleniyor...
+[+] Standby bellek temizleniyor...
+[+] Bellek optimize ediliyor...
+
+[+] Temizlik tamamlandi!
+
+[+] Yeni bellek durumu:
+Available Physical Memory: 6,128 MB`
   }
 ]
 

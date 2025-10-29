@@ -66,25 +66,7 @@ export default function Footer() {
               </svg>
             </a>
 
-            <span className="text-gray-300 dark:text-gray-600">|</span>
 
-            {/* Links */}
-            <a
-              href="https://github.com/ibidi/it-toolkit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://github.com/ibidi/it-toolkit/blob/main/LICENSE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
-            >
-              MIT License
-            </a>
           </div>
         </div>
       </div>
