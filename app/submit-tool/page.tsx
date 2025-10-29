@@ -130,7 +130,7 @@ export default function SubmitToolPage() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black placeholder:text-gray-400"
                 placeholder="Örn: IP Scanner"
               />
             </div>
@@ -188,7 +188,7 @@ export default function SubmitToolPage() {
                 onChange={handleChange}
                 required
                 rows={3}
-                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black placeholder:text-gray-400"
                 placeholder="Aracın ne işe yaradığını kısaca açıklayın"
               />
             </div>
@@ -204,7 +204,7 @@ export default function SubmitToolPage() {
                 name="usage"
                 value={formData.usage}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black placeholder:text-gray-400"
                 placeholder="Örn: python ip_scanner.py"
               />
             </div>
@@ -220,7 +220,7 @@ export default function SubmitToolPage() {
                 value={formData.features}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-black placeholder:text-gray-400"
                 placeholder="Ağdaki aktif IP'leri tarar&#10;Hızlı tarama&#10;Detaylı rapor"
               />
             </div>
@@ -237,7 +237,7 @@ export default function SubmitToolPage() {
                 onChange={handleChange}
                 required
                 rows={12}
-                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black font-mono text-sm placeholder:text-gray-400"
+                className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black font-mono text-sm text-black placeholder:text-gray-400"
                 placeholder="Kodunuzu buraya yapıştırın..."
               />
             </div>
