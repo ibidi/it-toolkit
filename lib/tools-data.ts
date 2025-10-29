@@ -10,6 +10,7 @@ export interface Tool {
   code: string
   example: string
   isPending?: boolean
+  isNew?: boolean
 }
 
 // Pending tools'u yükle
@@ -1475,6 +1476,7 @@ pause`,
     description: 'Ağ bant genişliği izleme aracı. Gerçek zamanlı download/upload hızını gösterir.',
     fileName: 'bandwidth_monitor.py',
     language: 'python',
+    isNew: true,
     features: [
       'Gerçek zamanlı bant genişliği izleme',
       'Download/Upload hızı',
@@ -1529,6 +1531,7 @@ Download: 2.45 MB/s | Upload: 512.34 KB/s`
     description: 'WiFi ağlarını tarayan araç. Sinyal gücü, şifreleme tipi ve kanal bilgilerini gösterir.',
     fileName: 'wifi_scanner.py',
     language: 'python',
+    isNew: true,
     features: [
       'WiFi ağ tarama',
       'Sinyal gücü gösterimi',
@@ -1597,6 +1600,7 @@ Güvenlik: WPA2-Enterprise`
     description: 'Zamanlanmış görev oluşturucu. Belirli saatlerde script çalıştırma.',
     fileName: 'task_scheduler.bat',
     language: 'batch',
+    isNew: true,
     features: [
       'Zamanlanmış görev oluşturma',
       'Günlük/Haftalık görevler',
@@ -1661,6 +1665,7 @@ Saat (HH:MM): 02:00
     description: 'USB cihaz takip sistemi. Takılan/çıkarılan USB cihazları loglar.',
     fileName: 'usb_monitor.py',
     language: 'python',
+    isNew: true,
     features: [
       'USB cihaz izleme',
       'Takma/çıkarma tespiti',
@@ -1735,6 +1740,7 @@ if __name__ == "__main__":
     description: 'RAM temizleme aracı. Kullanılmayan belleği temizler ve optimize eder.',
     fileName: 'memory_cleaner.bat',
     language: 'batch',
+    isNew: true,
     features: [
       'RAM temizleme',
       'Önbellek temizleme',

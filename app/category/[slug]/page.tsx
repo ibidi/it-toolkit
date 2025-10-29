@@ -74,8 +74,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <Link
               key={tool.id}
               href={`/tool/${tool.id}`}
-              className="group bg-white dark:bg-gray-800 rounded-xl p-6 border-2 border-black dark:border-white hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-all hover:scale-105"
+              className="group bg-white dark:bg-gray-800 rounded-xl p-6 border-2 border-black dark:border-white hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-all hover:scale-105 relative"
             >
+              {tool.isNew && (
+                <div className="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
+                  YENİ
+                </div>
+              )}
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h3 className="text-2xl font-bold text-black dark:text-white group-hover:text-white dark:group-hover:text-black mb-2">

@@ -58,7 +58,12 @@ export default async function ToolPage({ params }: { params: Promise<{ id: strin
         </Link>
 
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 md:p-8 border-2 border-black dark:border-white mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 md:p-8 border-2 border-black dark:border-white mb-8 relative">
+          {tool.isNew && (
+            <div className="absolute -top-3 -right-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg animate-pulse">
+              YENİ ARAÇ
+            </div>
+          )}
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-4">
