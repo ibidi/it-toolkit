@@ -6,7 +6,7 @@ import { Moon, Sun } from 'lucide-react'
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     const timer = setTimeout(() => setMounted(true), 0)
