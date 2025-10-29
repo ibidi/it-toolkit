@@ -82,7 +82,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider>
           <Header />
           <main className="min-h-screen bg-white dark:bg-gray-900">
             {children}
