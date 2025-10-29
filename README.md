@@ -11,8 +11,11 @@ Modern, minimal ve responsive bir web sitesi ile IT araçlarını sergileyin. Py
 ## 🎯 Özellikler
 
 - ✅ **Modern Tasarım** - Minimal siyah-beyaz tema
+- ✅ **Dark Mode** - Otomatik sistem teması desteği ile tam dark mode
+- ✅ **Loading Bar** - Sayfa geçişlerinde gradient animasyonlu loading
 - ✅ **Animasyonlu Hero** - Framer Motion ile dinamik metin animasyonları
 - ✅ **Araç İstek Sistemi** - Telegram bot entegrasyonu ile araç önerileri
+- ✅ **Dil İkonları** - Python, JavaScript, Batch, Bash, PowerShell ikonları
 - ✅ **Responsive** - Mobil, tablet, desktop uyumlu
 - ✅ **Kod Gösterimi** - Syntax highlighting ve kopyalama özelliği
 - ✅ **Modal Animasyonları** - Yumuşak açılış/kapanış efektleri
@@ -92,9 +95,15 @@ Araç istek sistemi için Telegram bot kurulumu:
 │   └── category/[slug]/       # Kategori sayfaları
 ├── components/                 # React bileşenleri
 │   ├── ui/                    # UI components
-│   │   └── layout-text-flip.tsx  # Animasyonlu metin
+│   │   ├── layout-text-flip.tsx  # Animasyonlu metin
+│   │   └── text-generate-effect.tsx  # Text animation
 │   ├── Header.tsx             # Navigation
 │   ├── Footer.tsx             # Footer
+│   ├── ThemeProvider.tsx      # Dark mode provider
+│   ├── ThemeToggle.tsx        # Theme switch button
+│   ├── PageLoadingBar.tsx     # Loading bar
+│   ├── NavigationEvents.tsx   # Navigation listener
+│   ├── LanguageIcon.tsx       # Language icons
 │   ├── CodeModal.tsx          # Kod modal (animasyonlu)
 │   └── CodeModalButton.tsx    # Modal trigger
 ├── lib/                       # Yardımcı fonksiyonlar
@@ -131,6 +140,8 @@ Araç istek sistemi için Telegram bot kurulumu:
 - **Language**: [TypeScript 5](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
 - **Animation**: [Framer Motion](https://www.framer.com/motion/)
+- **Theme**: [next-themes](https://github.com/pacocoursey/next-themes)
+- **Loading**: [NProgress](https://ricostacruz.com/nprogress/)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Deployment**: [Vercel](https://vercel.com/)
 

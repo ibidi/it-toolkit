@@ -2,6 +2,72 @@
 
 Tüm önemli değişiklikler bu dosyada belgelenecektir.
 
+## [2.3.0] - 2025-10-29
+
+### 🎨 Dark Mode & UI İyileştirmeleri
+
+#### Added (Eklenenler)
+- 🌙 **Dark Mode Desteği** - Tam dark mode implementasyonu
+  - ThemeProvider ile next-themes entegrasyonu
+  - System tema desteği (otomatik light/dark)
+  - ThemeToggle butonu (Header'da)
+  - Tüm sayfalarda dark mode desteği
+  - Smooth geçişler (disableTransitionOnChange)
+- 🎯 **Loading Bar Sistemi** - Sayfa geçişlerinde modern loading
+  - NProgress kütüphanesi entegrasyonu
+  - Gradient animasyonlu loading bar
+  - Dark mode uyumlu (siyah/beyaz)
+  - Browser back/forward desteği
+  - Suspense boundary ile SSG uyumlu
+  - Smooth animasyonlar ve blur efektleri
+- 🎨 **Dil İkonları** - Programlama dilleri için SVG ikonlar
+  - Python, JavaScript, Batch, Bash, PowerShell ikonları
+  - Ana sayfa ve kategori sayfalarında görünüyor
+  - Dark mode uyumlu renkler
+
+#### Changed (Değişiklikler)
+- 🌙 **Tüm Sayfalar Dark Mode**
+  - Ana sayfa (Hero, araç kartları, pagination)
+  - Kategori sayfaları (başlık, araç kartları)
+  - Araç detay sayfaları
+  - Araç öner formu (tüm input'lar)
+  - Footer (sosyal medya ikonları)
+  - Header (navigasyon linkleri)
+- 🎨 **TextGenerateEffect**
+  - Dark mode'da text-gray-300 (daha okunabilir)
+  - Light mode'da text-gray-600
+- 🔧 **ThemeToggle İyileştirmesi**
+  - resolvedTheme desteği (system tema için)
+  - setTimeout ile setState (lint uyumlu)
+  - Icon renkleri dark mode'da doğru
+
+#### Fixed (Düzeltmeler)
+- ✅ Footer dark mode geçişi ('use client' eklendi)
+- ✅ ThemeToggle icon renkleri düzeltildi
+- ✅ Category sayfası dark mode desteği eklendi
+- ✅ Ana sayfa açıklama metni dark mode'da okunabilir
+- ✅ Araç öner formu dark mode desteği
+- ✅ ThemeToggle lint hatası (setState in effect)
+- ✅ PageLoadingBar Suspense boundary eklendi
+
+#### Technical
+- 📦 Yeni bağımlılıklar:
+  - `next-themes` - Dark mode yönetimi
+  - `nprogress` - Loading bar
+  - `@types/nprogress` - TypeScript types
+- 🎨 Yeni componentler:
+  - `components/ThemeProvider.tsx` - Theme context
+  - `components/ThemeToggle.tsx` - Theme switch button
+  - `components/PageLoadingBar.tsx` - Loading bar
+  - `components/NavigationEvents.tsx` - Navigation listener
+  - `components/LanguageIcon.tsx` - Language icons
+- 🎨 Yeni CSS:
+  - `app/nprogress.css` - Loading bar styles
+  - Gradient animations
+  - Dark mode variants
+
+---
+
 ## [2.2.0] - 2025-10-29
 
 ### 🚀 Major Features
