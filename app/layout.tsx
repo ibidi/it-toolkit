@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./nprogress.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/StructuredData";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import PageLoadingBar from "@/components/PageLoadingBar";
+import NavigationEvents from "@/components/NavigationEvents";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -83,6 +86,8 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ThemeProvider>
+          <PageLoadingBar />
+          <NavigationEvents />
           <Header />
           <main className="min-h-screen bg-white dark:bg-gray-900">
             {children}
