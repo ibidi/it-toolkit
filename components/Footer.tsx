@@ -1,17 +1,19 @@
+'use client'
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-white border-t border-gray-200 py-8">
+    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-600 dark:text-gray-400 text-sm">
             © {currentYear} IT Toolkit. Made with ❤️ by{' '}
             <a
               href="https://ihsanbakidogan.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-black font-semibold hover:underline"
+              className="text-black dark:text-white font-semibold hover:underline"
             >
               İhsan Baki Doğan
             </a>
@@ -23,7 +25,7 @@ export default function Footer() {
               href="https://github.com/ibidi"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-black transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
               aria-label="GitHub"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -34,7 +36,7 @@ export default function Footer() {
               href="https://ihsanbakidogan.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-black transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
               aria-label="Website"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,7 +47,7 @@ export default function Footer() {
               href="https://instagram.com/ihsanbakidogann"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-black transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
               aria-label="Instagram"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -56,7 +58,7 @@ export default function Footer() {
               href="https://x.com/ibidicodes"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-black transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
               aria-label="X"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -64,14 +66,14 @@ export default function Footer() {
               </svg>
             </a>
 
-            <span className="text-gray-300">|</span>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
 
             {/* Links */}
             <a
               href="https://github.com/ibidi/it-toolkit"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-black transition-colors text-sm"
+              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
             >
               GitHub
             </a>
@@ -79,7 +81,7 @@ export default function Footer() {
               href="https://github.com/ibidi/it-toolkit/blob/main/LICENSE"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-black transition-colors text-sm"
+              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
             >
               MIT License
             </a>
